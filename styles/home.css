@@ -394,3 +394,111 @@
     border-radius: 1rem;
     color: white;
 }
+
+/*********************************************************/
+
+.section5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+}
+
+.section5 h2{
+    font-size: 3em;
+}
+
+.section5-slider{
+    width: 100%;
+    background: #845EC2;
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section5-slider-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.section5-slider-block img:first-child{
+    margin-bottom: 2rem;
+}
+
+.section5-slider-block-text{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.section5-slider-block-text h3{
+    font-size: 3.5em;
+    color: white;
+}
+
+.section5-slider-block-text p{
+    font-size: 1.3em;
+    color: white;
+}
+
+.section5-slider-block-text-price, .section5-slider-block-text-colors{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section5-slider-block-text-price p{
+    font-size: 2em;
+    color: white;
+}
+
+.section5-slider-block-text-price b{
+    font-size: 2em;
+    color: white;
+}
+
+.section5-slider-block-text-color1{
+    padding: 1rem;
+    border-radius: 50%;
+    background: #000;
+}
+
+.section5-slider-block-text-color2{
+    padding: 1rem;
+    border-radius: 50%;
+    background: #FFF500;
+}
+
+.section5-slider-block-text-color3{
+    padding: 1rem;
+    border-radius: 50%;
+    background: #4484FF;
+}
+
+.section5-slider-block-text-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section5-slider-block-text-buttons button{
+    padding: 1rem 5rem;
+    border-radius: 0.5rem;
+    font-size: 1.3em;
+    background: transparent;
+    color: white;
+}
+
+.section5-slider-block-text-buttons button:first-child{
+    background: #10B981;
+}
