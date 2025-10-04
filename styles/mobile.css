@@ -1,0 +1,445 @@
+@media (max-width: 1150px) {
+    .section5-slider-block img:first-child{
+        display: none;
+    }
+
+    .section2-left-imgs img:first-child{
+        display: none;
+    }
+
+    .section2{
+        padding: 1rem;
+    }
+    
+    footer{
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 1024px) {
+  .header-top {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .header-top-buttons {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .header-bottom nav {
+    gap: 2rem;
+  }
+  
+  .section1 {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 3rem;
+  }
+  
+  .section1-left,
+  .section1-right {
+    width: 100%;
+  }
+  
+  .section1-left-top h2 {
+    font-size: 2.5em;
+  }
+  
+  .section2 {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+  }
+  
+  .section2-left,
+  .section2-right {
+    width: 100%;
+  }
+  
+  .section3-slider-cards,
+  .section4-slider-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .section5-slider-block {
+    flex-direction: column;
+  }
+  
+  footer {
+    padding: 3rem 2rem;
+  }
+  
+  .footer-center {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    font-size: 2em;
+  }
+
+  .section2, .section3, .section4{
+    padding: 1rem;
+  }
+
+  .section5-slider{
+    gap: 0;
+  }
+  
+  .header-top-buttons1,
+  .header-top-buttons2 {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9em;
+  }
+  
+  .search-container {
+    max-width: 300px;
+  }
+  
+  .header-bottom nav {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .header-bottom nav a {
+    font-size: 1em;
+  }
+  
+  .section1-left-top h2 {
+    font-size: 2em;
+  }
+  
+  .section1-left-top p {
+    font-size: 1.1em;
+  }
+  
+  .section1-left-top button {
+    padding: 0.8rem 2rem;
+    font-size: 1.1em;
+  }
+  
+  .product-card {
+    width: 250px;
+    height: 350px;
+  }
+  
+  .curved-text-container {
+    top: -10px;
+  }
+  
+  .curved-text {
+    width: 230px;
+    height: 120px;
+  }
+  
+  .curved-text text {
+    font-size: 1.5em;
+  }
+  
+  .product-image {
+    padding: 5rem 1rem;
+  }
+  
+  .section2-left p {
+    font-size: 2.5em;
+  }
+  
+  .section2-right h2 {
+    font-size: 2em;
+  }
+  
+  .section2-right p {
+    font-size: 1.1em;
+  }
+  
+  .section2-right-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .section2-right-buttons1,
+  .section2-right-buttons2 {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .section3-slider-cards,
+  .section4-slider-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .section3-slider-card-block,
+  .section4-slider-card-block {
+    min-height: 350px;
+  }
+  
+  .section5 h2 {
+    font-size: 2.5em;
+  }
+  
+  .section5-slider {
+    padding: 2rem;
+  }
+  
+  .section5-slider-block-text h3 {
+    font-size: 2.5em;
+  }
+  
+  .section5-slider-block-text p {
+    font-size: 1.1em;
+  }
+  
+  .section5-slider-block-text-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .section5-slider-block-text-buttons button {
+    width: 100%;
+    padding: 1rem 2rem;
+  }
+  
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-center {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .section4-buttons{
+    flex-direction: column;
+  }
+
+  .search-input{
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-top-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .footer-center-block{
+    width: 100%;
+  }
+
+  .arrow{
+    width: 30px;
+  }
+
+  .email-container{
+    width: 100%;
+  }
+
+  .section4-slider, .section3-slider{
+    gap: 0;
+  }
+  
+  .footer-center{
+    width: 100%;
+  }
+
+  .search-container {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .header-top-buttons1,
+  .header-top-buttons2 {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .header-bottom {
+    padding: 1rem;
+  }
+  
+  .header-bottom nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .section1-left-top h2 {
+    font-size: 1.8em;
+  }
+  
+  .section1-left-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .section1-right {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .section1-right-left {
+    flex-direction: row;
+  }
+  
+  .product-card {
+    width: 220px;
+    height: 320px;
+  }
+  
+  .curved-text {
+    width: 200px;
+    height: 100px;
+  }
+  
+  .curved-text text {
+    font-size: 1.3em;
+  }
+  
+  .product-image {
+    padding: 4rem 1rem;
+  }
+  
+  .section2-left p {
+    font-size: 2em;
+  }
+  
+  .section2-left-imgs {
+    flex-direction: column;
+  }
+  
+  .section2-left-imgs img:nth-child(2) {
+    margin-bottom: 0;
+    transform: scale(1);
+  }
+  
+  .section2-left-price {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .section3-buttons,
+  .section4-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .section3-buttons button,
+  .section4-buttons button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2em;
+  }
+  
+  .section5-slider {
+    padding: 1.5rem;
+  }
+  
+  .section5-slider-block-text h3 {
+    font-size: 2em;
+  }
+  
+  .section5-slider-block-text-price {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  footer {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo {
+    font-size: 1.8em;
+  }
+  
+  .section1-left-top h2 {
+    font-size: 1.5em;
+  }
+  
+  .section1-left-top p {
+    font-size: 1em;
+  }
+  
+  .section1-left-top button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1em;
+  }
+  
+  .product-card {
+    width: 200px;
+    height: 300px;
+  }
+  
+  .curved-text {
+    width: 180px;
+  }
+  
+  .curved-text text {
+    font-size: 1.1em;
+  }
+  
+  .product-image {
+    padding: 3.5rem 0.5rem;
+  }
+  
+  .section2-left p {
+    font-size: 1.7em;
+  }
+  
+  .section2-right h2 {
+    font-size: 1.7em;
+  }
+  
+  .section2-right p {
+    font-size: 1em;
+  }
+  
+  .section3 h2,
+  .section4 h2 {
+    font-size: 2em;
+  }
+  
+  .section3-buttons button,
+  .section4-buttons button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.1em;
+  }
+  
+  .section5 h2 {
+    font-size: 2em;
+  }
+  
+  .section5-slider-block-text h3 {
+    font-size: 1.7em;
+  }
+  
+  .section5-slider-block-text p {
+    font-size: 1em;
+  }
+  
+  .section5-slider-block-text-buttons button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1em;
+  }
+  
+  .footer-top p {
+    font-size: 1.2em;
+  }
+  
+  .footer-top button {
+    font-size: 1.1em;
+    padding: 0.8rem 1.5rem;
+  }
+}
