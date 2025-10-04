@@ -227,6 +227,10 @@
   .search-input{
     padding: 1rem;
   }
+
+  .none{
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
