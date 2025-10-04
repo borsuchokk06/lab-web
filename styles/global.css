@@ -20,7 +20,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    max-width: 1920px;
+    max-width: 1440px;
     width: 100%;
 }
 
@@ -46,9 +46,10 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
     flex-direction: column;
     width: 100%;
+    max-width: 1440px;
+    padding-top: 2rem;
 }
 
 h1, h2, h3, h4, a, span, p, b{

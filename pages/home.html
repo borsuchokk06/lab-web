@@ -15,7 +15,9 @@
 <body>
     <header>
         <div class="header-top">
-            <h1>Shopper</h1>
+            <h1 class="logo">
+                <span class="shop">Shop</span><span class="per">per</span>
+            </h1>
             <div class="header-top-buttons">
                 <div class="search-container">
                     <input type="text" placeholder="Search Items" class="search-input">
@@ -37,32 +39,44 @@
         </div>
     </header>
     <main>
-        <section>
-            <div>
-                <div>
-                    <h2></h2>
-                    <p></p>
-                    <button></button>
+        <section class="section1">
+            <div class="section1-left">
+                <div class="section1-left-top">
+                    <h2>Discover Our Latest  Products</h2>
+                    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a product</p>
+                    <button>Buy Now</button>
                 </div>
-                <div>
-                    <img>
-                    <p></p>
+                <div class="section1-left-bottom">
+                    <img src="../images/15k.png" alt="">
+                    <p>15k Well<br>Reviews</p>
                 </div>
             </div>
-            <div>
-                <div>
-                    <img>
-                    <p></p>
+            <div class="section1-right">
+                <div class="section1-right-left">
+                    <img src="../images/playvideio.png" alt="">
+                    <p>Play Video</p>
                 </div>
-                <div>
-                    <div><img></div>
-                    <div>
-                        <p></p>
-                        <div>
-                            <img>
-                        </div>
-                    </div>
-                    <div><img></div>
+                <div class="section1-right-right">
+                    <div class="section1-right-right-top"><img src="../images/star.png" alt=""></div>
+<div class="product-card">
+    <div class="curved-text-container">
+        <svg viewBox="0 0 300 120" class="curved-text">
+            <path id="textCurve" d="M 0,100 A 110,90 0 1 1 300,130" fill="transparent"/>
+            <text>
+                <textPath href="#textCurve" startOffset="50%" text-anchor="middle" 
+                          dominant-baseline="middle">
+                    Red Beats M19C22
+                </textPath>
+            </text>
+        </svg>
+    </div>
+    
+    <div class="product-image">
+        <img src="../images/product.png" alt="Red Beats">
+        <div class="product-price">$50</div>
+    </div>
+</div>
+                    <div class="section1-right-right-bottom"><img src="../images/star.png" alt=""></div>
                 </div>
             </div>
         </section>

@@ -16,8 +16,16 @@ header{
     width: 100%;
 }
 
-.header-top h1{
+.logo {
     font-size: 2.5em;
+}
+
+.shop {
+    color: #10B981; 
+}
+
+.per {
+    color: #000000; 
 }
 
 .header-top-buttons{
