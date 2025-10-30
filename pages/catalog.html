@@ -9,12 +9,27 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/catalog.css">
+    <link rel="stylesheet" href="../styles/preloader.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="shop">Shop</span><span class="per">per</span>
+            </div>
+            <div class="preloader-spinner">
+                <div class="spinner-circle"></div>
+                <div class="spinner-circle"></div>
+                <div class="spinner-circle"></div>
+            </div>
+            <p class="preloader-text">Loading amazing products...</p>
+        </div>
+    </div>
     <header>
         <div class="header-top">
             <h1 class="logo">
@@ -197,6 +212,7 @@
             </div>
         </div>
     </footer>
+    <script src="../scripts/preloader.js"></script>
     <script src="../scripts/catalog.js"></script>
 </body>
 </html>
