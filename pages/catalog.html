@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog - Shopper</title>
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/catalog.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1 class="logo">
+                <span class="shop">Shop</span><span class="per">per</span>
+            </h1>
+            <div class="header-top-buttons">
+                <div class="search-container">
+                    <input type="text" placeholder="Search Items" class="search-input">
+                    <button type="button" class="search-button">
+                        <img src="../images/search.png" alt="">
+                    </button>
+                </div>
+                <button class="header-top-buttons1"><img src="../images/Shopping-bag.png" alt=""> 0 Items Added</button>
+                <button class="header-top-buttons2"><img src="../images/Profile.png" alt=""> Login or Sign Up</button>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="#">Features</a>
+                <a href="catalog.html">Products</a>
+                <a href="#">Blog</a>
+                <a href="#">About</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="catalog-section">
+            <h1>Product Catalog</h1>
+            <p class="catalog-description">Browse our complete collection of premium audio products</p>
+            
+            <!-- Search and Sort Controls -->
+            <div class="search-sort-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" class="search-field" placeholder="Search products by name or description...">
+                    <button type="button" class="clear-search" id="clear-search">✕</button>
+                </div>
+                <div class="sort-box">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" class="sort-dropdown">
+                        <option value="default">Default Order</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="price-asc">Price (Low to High)</option>
+                        <option value="price-desc">Price (High to Low)</option>
+                        <option value="reviews-desc">Most Reviewed</option>
+                        <option value="reviews-asc">Least Reviewed</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Category Filters -->
+            <div class="catalog-filters">
+                <h3>Filter by Category:</h3>
+                <div class="category-checkboxes">
+                    <label class="category-checkbox">
+                        <input type="checkbox" value="all" id="cat-all" checked>
+                        <span>All Products</span>
+                    </label>
+                    <label class="category-checkbox">
+                        <input type="checkbox" value="headphones" id="cat-headphones">
+                        <span>Headphones</span>
+                    </label>
+                    <label class="category-checkbox">
+                        <input type="checkbox" value="earbuds" id="cat-earbuds">
+                        <span>Earbuds</span>
+                    </label>
+                    <label class="category-checkbox">
+                        <input type="checkbox" value="wireless" id="cat-wireless">
+                        <span>Wireless</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Results Counter -->
+            <div class="results-info">
+                <p id="results-counter">Showing <strong>15</strong> products</p>
+            </div>
+            
+            <div class="array-methods-section">
+                <h2>Array Methods Demo</h2>
+                <p class="methods-description">Explore different JavaScript array methods and see how they transform the product catalog</p>
+                <div class="array-methods-buttons">
+                    <button class="method-btn" data-method="price-asc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Price: Low to High</span>
+                    </button>
+                    <button class="method-btn" data-method="price-desc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Price: High to Low</span>
+                    </button>
+                    <button class="method-btn" data-method="reviews-desc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Most Reviewed</span>
+                    </button>
+                    <button class="method-btn" data-method="cheap">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Under $30</span>
+                    </button>
+                    <button class="method-btn" data-method="expensive">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Over $40</span>
+                    </button>
+                    <button class="method-btn" data-method="hot">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Hot Deals</span>
+                    </button>
+                    <button class="method-btn" data-method="new">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">New Arrivals</span>
+                    </button>
+                    <button class="method-btn" data-method="discount">
+                        <span class="method-name">map()</span>
+                        <span class="method-desc">10% Discount</span>
+                    </button>
+                    <button class="method-btn" data-method="reverse">
+                        <span class="method-name">reverse()</span>
+                        <span class="method-desc">Reverse Order</span>
+                    </button>
+                    <button class="method-btn" data-method="top5">
+                        <span class="method-name">slice()</span>
+                        <span class="method-desc">Top 5 Products</span>
+                    </button>
+                </div>
+                <div class="array-info">
+                    <p id="method-info">Select a method to see the results</p>
+                </div>
+                <button class="reset-btn" id="reset-catalog">
+                    <span>↻ Reset Catalog</span>
+                </button>
+            </div>
+            
+            <div id="catalog-container"></div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-top">
+            <p>Ready to get started?</p>
+            <button>Get started</button>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-block">
+                <p>Subscribe to our<br>Website</p>
+                <div class="email-container">
+                    <input type="text" placeholder="Email address" class="email-input">
+                    <button type="button" class="email-button">
+                        <img src="../images/ic-keyboard-arrow-right-48px.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="footer-center-list">
+                <p>Services</p>
+                <a href="">Email Marketing</a>
+                <a href="">Campaigns</a>
+                <a href="">Branding</a>
+                <a href="">Offline</a>
+            </div>
+            <div class="footer-center-list">
+                <p>About</p>
+                <a href="">Our Story</a>
+                <a href="">Benefits</a>
+                <a href="">Team</a>
+                <a href="">Careers</a>               
+            </div>
+            <div class="footer-center-list">
+                <p>Help</p>
+                <a href="">FAQs</a>
+                <a href="">Contact Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                <a>Terms & Conditions</a>
+                <a>Privacy Policy</a>
+            </div>
+            <div class="footer-bottom-right">
+                <img src="../images/001-facebook.png" alt="">
+                <img src="../images/003-twitter.png" alt="">
+                <img src="../images/004-instagram.png" alt="">
+            </div>
+        </div>
+    </footer>
+    <script src="../scripts/catalog.js"></script>
+</body>
+</html>
+
