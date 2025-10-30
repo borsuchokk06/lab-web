@@ -240,12 +240,146 @@ function filterProducts(category) {
     }
 }
 
+// Функция для обновления информации о примененном методе
+function updateMethodInfo(methodName, description, resultCount) {
+    const infoElement = document.getElementById('method-info');
+    infoElement.innerHTML = `
+        <strong>Method:</strong> <code>${methodName}</code><br>
+        <strong>Description:</strong> ${description}<br>
+        <strong>Results:</strong> ${resultCount} product(s) displayed
+    `;
+}
+
+// Функции для применения различных методов массивов
+const arrayMethods = {
+    // 1. sort() - Сортировка по цене (возрастание)
+    'price-asc': () => {
+        const sorted = [...products].sort((a, b) => a.price - b.price);
+        generateProductCards(sorted);
+        updateMethodInfo(
+            'sort((a, b) => a.price - b.price)',
+            'Sorts products by price in ascending order (lowest to highest)',
+            sorted.length
+        );
+    },
+
+    // 2. sort() - Сортировка по цене (убывание)
+    'price-desc': () => {
+        const sorted = [...products].sort((a, b) => b.price - a.price);
+        generateProductCards(sorted);
+        updateMethodInfo(
+            'sort((a, b) => b.price - a.price)',
+            'Sorts products by price in descending order (highest to lowest)',
+            sorted.length
+        );
+    },
+
+    // 3. sort() - Сортировка по количеству отзывов (убывание)
+    'reviews-desc': () => {
+        const sorted = [...products].sort((a, b) => b.reviews - a.reviews);
+        generateProductCards(sorted);
+        updateMethodInfo(
+            'sort((a, b) => b.reviews - a.reviews)',
+            'Sorts products by review count in descending order (most reviewed first)',
+            sorted.length
+        );
+    },
+
+    // 4. filter() - Товары дешевле $30
+    'cheap': () => {
+        const filtered = products.filter(product => product.price < 30);
+        generateProductCards(filtered);
+        updateMethodInfo(
+            'filter(product => product.price < 30)',
+            'Filters products with price less than $30',
+            filtered.length
+        );
+    },
+
+    // 5. filter() - Товары дороже $40
+    'expensive': () => {
+        const filtered = products.filter(product => product.price > 40);
+        generateProductCards(filtered);
+        updateMethodInfo(
+            'filter(product => product.price > 40)',
+            'Filters products with price greater than $40',
+            filtered.length
+        );
+    },
+
+    // 6. filter() - Товары с бейджем "Hot"
+    'hot': () => {
+        const filtered = products.filter(product => product.badge === "Hot");
+        generateProductCards(filtered);
+        updateMethodInfo(
+            'filter(product => product.badge === "Hot")',
+            'Filters products with "Hot" badge - special deals and popular items',
+            filtered.length
+        );
+    },
+
+    // 7. filter() - Товары с бейджем "New"
+    'new': () => {
+        const filtered = products.filter(product => product.badge === "New");
+        generateProductCards(filtered);
+        updateMethodInfo(
+            'filter(product => product.badge === "New")',
+            'Filters products with "New" badge - newest arrivals',
+            filtered.length
+        );
+    },
+
+    // 8. map() - Применение скидки 10% ко всем товарам
+    'discount': () => {
+        const discounted = products.map(product => ({
+            ...product,
+            price: parseFloat((product.price * 0.9).toFixed(2)),
+            badge: "Sale"
+        }));
+        generateProductCards(discounted);
+        updateMethodInfo(
+            'map(product => ({...product, price: product.price * 0.9}))',
+            'Applies 10% discount to all products using map() to transform the array',
+            discounted.length
+        );
+    },
+
+    // 9. reverse() - Обратный порядок товаров
+    'reverse': () => {
+        const reversed = [...products].reverse();
+        generateProductCards(reversed);
+        updateMethodInfo(
+            'reverse()',
+            'Reverses the order of products in the array',
+            reversed.length
+        );
+    },
+
+    // 10. slice() - Первые 5 товаров
+    'top5': () => {
+        const topProducts = products.slice(0, 5);
+        generateProductCards(topProducts);
+        updateMethodInfo(
+            'slice(0, 5)',
+            'Returns only the first 5 products from the array',
+            topProducts.length
+        );
+    }
+};
+
+// Функция для применения метода массива
+function applyArrayMethod(method) {
+    if (arrayMethods[method]) {
+        arrayMethods[method]();
+    }
+}
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     // Генерация всех карточек товаров
     generateProductCards(products);
 
-    // Обработка кликов на кнопки фильтров
+    // Обработка кликов на кнопки фильтров категорий
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -256,7 +390,42 @@ document.addEventListener('DOMContentLoaded', () => {
             // Фильтрация товаров
             const category = button.getAttribute('data-category');
             filterProducts(category);
+            // Сброс информации о методе
+            document.getElementById('method-info').textContent = 'Select a method to see the results';
         });
+    });
+
+    // Обработка кликов на кнопки методов массивов
+    const methodButtons = document.querySelectorAll('.method-btn');
+    methodButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const method = button.getAttribute('data-method');
+            applyArrayMethod(method);
+            
+            // Добавление визуального эффекта активной кнопки
+            methodButtons.forEach(btn => btn.style.borderColor = '#e0e0e0');
+            button.style.borderColor = '#10B981';
+            
+            // Сброс активного фильтра категории
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+        });
+    });
+
+    // Обработка клика на кнопку сброса
+    const resetButton = document.getElementById('reset-catalog');
+    resetButton.addEventListener('click', () => {
+        // Восстановление исходного каталога
+        generateProductCards(products);
+        
+        // Сброс активного состояния всех кнопок методов
+        methodButtons.forEach(btn => btn.style.borderColor = '#e0e0e0');
+        
+        // Восстановление активного состояния фильтра "All Products"
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        filterButtons[0].classList.add('active');
+        
+        // Сброс информации о методе
+        document.getElementById('method-info').textContent = 'Select a method to see the results';
     });
 
     // Обработка кликов на кнопки "Add to Cart"
