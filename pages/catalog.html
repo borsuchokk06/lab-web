@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog - Shopper</title>
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/catalog.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1 class="logo">
+                <span class="shop">Shop</span><span class="per">per</span>
+            </h1>
+            <div class="header-top-buttons">
+                <div class="search-container">
+                    <input type="text" placeholder="Search Items" class="search-input">
+                    <button type="button" class="search-button">
+                        <img src="../images/search.png" alt="">
+                    </button>
+                </div>
+                <button class="header-top-buttons1"><img src="../images/Shopping-bag.png" alt=""> 0 Items Added</button>
+                <button class="header-top-buttons2"><img src="../images/Profile.png" alt=""> Login or Sign Up</button>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="#">Features</a>
+                <a href="catalog.html">Products</a>
+                <a href="#">Blog</a>
+                <a href="#">About</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="catalog-section">
+            <h1>Product Catalog</h1>
+            <p class="catalog-description">Browse our complete collection of premium audio products</p>
+            <div class="catalog-filters">
+                <button class="filter-btn active" data-category="all">All Products</button>
+                <button class="filter-btn" data-category="headphones">Headphones</button>
+                <button class="filter-btn" data-category="earbuds">Earbuds</button>
+                <button class="filter-btn" data-category="wireless">Wireless</button>
+            </div>
+            <div id="catalog-container"></div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-top">
+            <p>Ready to get started?</p>
+            <button>Get started</button>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-block">
+                <p>Subscribe to our<br>Website</p>
+                <div class="email-container">
+                    <input type="text" placeholder="Email address" class="email-input">
+                    <button type="button" class="email-button">
+                        <img src="../images/ic-keyboard-arrow-right-48px.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="footer-center-list">
+                <p>Services</p>
+                <a href="">Email Marketing</a>
+                <a href="">Campaigns</a>
+                <a href="">Branding</a>
+                <a href="">Offline</a>
+            </div>
+            <div class="footer-center-list">
+                <p>About</p>
+                <a href="">Our Story</a>
+                <a href="">Benefits</a>
+                <a href="">Team</a>
+                <a href="">Careers</a>               
+            </div>
+            <div class="footer-center-list">
+                <p>Help</p>
+                <a href="">FAQs</a>
+                <a href="">Contact Us</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left">
+                <a>Terms & Conditions</a>
+                <a>Privacy Policy</a>
+            </div>
+            <div class="footer-bottom-right">
+                <img src="../images/001-facebook.png" alt="">
+                <img src="../images/003-twitter.png" alt="">
+                <img src="../images/004-instagram.png" alt="">
+            </div>
+        </div>
+    </footer>
+    <script src="../scripts/catalog.js"></script>
+</body>
+</html>
+
