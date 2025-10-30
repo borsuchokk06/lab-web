@@ -51,6 +51,60 @@
                 <button class="filter-btn" data-category="earbuds">Earbuds</button>
                 <button class="filter-btn" data-category="wireless">Wireless</button>
             </div>
+            
+            <div class="array-methods-section">
+                <h2>Array Methods Demo</h2>
+                <p class="methods-description">Explore different JavaScript array methods and see how they transform the product catalog</p>
+                <div class="array-methods-buttons">
+                    <button class="method-btn" data-method="price-asc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Price: Low to High</span>
+                    </button>
+                    <button class="method-btn" data-method="price-desc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Price: High to Low</span>
+                    </button>
+                    <button class="method-btn" data-method="reviews-desc">
+                        <span class="method-name">sort()</span>
+                        <span class="method-desc">Most Reviewed</span>
+                    </button>
+                    <button class="method-btn" data-method="cheap">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Under $30</span>
+                    </button>
+                    <button class="method-btn" data-method="expensive">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Over $40</span>
+                    </button>
+                    <button class="method-btn" data-method="hot">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">Hot Deals</span>
+                    </button>
+                    <button class="method-btn" data-method="new">
+                        <span class="method-name">filter()</span>
+                        <span class="method-desc">New Arrivals</span>
+                    </button>
+                    <button class="method-btn" data-method="discount">
+                        <span class="method-name">map()</span>
+                        <span class="method-desc">10% Discount</span>
+                    </button>
+                    <button class="method-btn" data-method="reverse">
+                        <span class="method-name">reverse()</span>
+                        <span class="method-desc">Reverse Order</span>
+                    </button>
+                    <button class="method-btn" data-method="top5">
+                        <span class="method-name">slice()</span>
+                        <span class="method-desc">Top 5 Products</span>
+                    </button>
+                </div>
+                <div class="array-info">
+                    <p id="method-info">Select a method to see the results</p>
+                </div>
+                <button class="reset-btn" id="reset-catalog">
+                    <span>↻ Reset Catalog</span>
+                </button>
+            </div>
+            
             <div id="catalog-container"></div>
         </section>
     </main>
