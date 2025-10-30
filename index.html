@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rick and Morty Characters</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Rick and Morty Characters browser with search, gender filter, and load more pagination.">
+</head>
+<body>
+    <main class="page">
+        <h1 class="page__title">Rick and Morty Characters</h1>
+
+        <form id="searchForm" class="controls" novalidate>
+            <label class="controls__field">
+                <span class="controls__label">Gender</span>
+                <select id="genderSelect" class="select">
+                    <option value="all" selected>all</option>
+                    <option value="female">female</option>
+                    <option value="male">male</option>
+                    <option value="genderless">genderless</option>
+                    <option value="unknown">unknown</option>
+                </select>
+            </label>
+
+            <label class="controls__field controls__field--search">
+                <span class="visually-hidden">Search by name</span>
+                <input id="searchInput" class="input" type="text" placeholder="Search by name" autocomplete="off" autofocus>
+                <button id="clearInputBtn" class="clear-btn" type="button" aria-label="Clear search" title="Clear">×</button>
+                <!-- Hidden submit to ensure Enter submits on some browsers -->
+                <button type="submit" class="visually-hidden" tabindex="-1" aria-hidden="true"></button>
+            </label>
+        </form>
+
+        <section aria-live="polite" aria-busy="false">
+            <div id="cardsContainer" class="cards"></div>
+            <div class="actions">
+                <button id="loadMoreBtn" class="load-more" type="button" style="display:none">Load more</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="footer__content">
+            <a id="authorLink" class="footer__link" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <span aria-hidden="true">•</span>
+            <span id="year"></span>
+        </div>
+    </footer>
+
+    <script defer src="main.js"></script>
+    <noscript>This app requires JavaScript to run.</noscript>
+</body>
+</html>
+
+
