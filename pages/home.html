@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="icon" type="image/png" href="../images/product.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/product.png">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../styles/footer.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -11,12 +13,22 @@
     <link rel="stylesheet" href="../styles/preloader.css">
     <link rel="stylesheet" href="../styles/slider.css">
     <link rel="stylesheet" href="../styles/burger-menu.css">
+    <link rel="stylesheet" href="../styles/product-modal.css">
+    <link rel="stylesheet" href="../styles/toast-notifications.css">
+    <link rel="stylesheet" href="../styles/map.css">
+    <link rel="stylesheet" href="../styles/media-gallery.css">
+    <link rel="stylesheet" href="../styles/video-player.css">
+    <link rel="stylesheet" href="../styles/smooth-scroll.css">
+    <link rel="stylesheet" href="../styles/scroll-animations.css">
+    <link rel="stylesheet" href="../styles/parallax.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Yandex Maps API -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=&lang=en_US" type="text/javascript"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -57,17 +69,83 @@
         </div>
         <div class="header-bottom">
             <nav>
-                <a href="home.html">Home</a>
-                <a href="#">Features</a>
-                <a href="catalog.html">Products</a>
-                <a href="#">Blog</a>
-                <a href="#">About</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#deals" class="nav-link">Deals</a>
+                <a href="#featured" class="nav-link">Featured</a>
+                <a href="#top-sellers" class="nav-link">Top Sellers</a>
+                <a href="#trending" class="nav-link">Trending</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#locations" class="nav-link">Locations</a>
+                <a href="catalog.html">Catalog</a>
             </nav>
         </div>
     </header>
     
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <span>↑</span>
+    </button>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+    
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+    
+    <!-- Product Modal -->
+    <div class="product-modal" id="product-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <div class="modal-badge" id="modal-badge"></div>
+                    <img src="" alt="" id="modal-image" class="modal-product-image">
+                    <div class="modal-gallery">
+                        <img src="" alt="" class="modal-gallery-thumb active" data-index="0">
+                        <img src="" alt="" class="modal-gallery-thumb" data-index="1">
+                        <img src="" alt="" class="modal-gallery-thumb" data-index="2">
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-category" id="modal-category"></div>
+                    <h2 class="modal-title" id="modal-title"></h2>
+                    <div class="modal-rating">
+                        <img src="../images/stars.png" alt="rating" class="modal-stars">
+                        <span id="modal-reviews"></span>
+                    </div>
+                    <p class="modal-description" id="modal-description"></p>
+                    <div class="modal-price-section">
+                        <div class="modal-price" id="modal-price"></div>
+                        <div class="modal-stock" id="modal-stock"></div>
+                    </div>
+                    <div class="modal-features">
+                        <h3>Key Features:</h3>
+                        <ul id="modal-features-list">
+                            <li>Premium sound quality</li>
+                            <li>Wireless connectivity</li>
+                            <li>Long battery life</li>
+                            <li>Comfortable design</li>
+                        </ul>
+                    </div>
+                    <div class="modal-actions">
+                        <div class="modal-quantity">
+                            <button class="qty-btn minus" id="qty-minus">−</button>
+                            <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="10">
+                            <button class="qty-btn plus" id="qty-plus">+</button>
+                        </div>
+                        <button class="modal-add-to-cart" id="modal-add-to-cart">
+                            <img src="../images/Shopping-bag.png" alt="">
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobile-menu">
@@ -78,25 +156,37 @@
             <button class="mobile-menu-close" id="mobile-close" aria-label="Close menu">✕</button>
         </div>
         <nav class="mobile-menu-nav">
-            <a href="home.html" class="mobile-menu-link">
+            <a href="#home" class="mobile-menu-link nav-link">
                 <span class="menu-icon">🏠</span>
                 <span>Home</span>
             </a>
-            <a href="#" class="mobile-menu-link">
+            <a href="#deals" class="mobile-menu-link nav-link">
+                <span class="menu-icon">💰</span>
+                <span>Deals</span>
+            </a>
+            <a href="#featured" class="mobile-menu-link nav-link">
                 <span class="menu-icon">⭐</span>
-                <span>Features</span>
+                <span>Featured</span>
+            </a>
+            <a href="#top-sellers" class="mobile-menu-link nav-link">
+                <span class="menu-icon">🔥</span>
+                <span>Top Sellers</span>
+            </a>
+            <a href="#trending" class="mobile-menu-link nav-link">
+                <span class="menu-icon">📈</span>
+                <span>Trending</span>
+            </a>
+            <a href="#gallery" class="mobile-menu-link nav-link">
+                <span class="menu-icon">🖼️</span>
+                <span>Gallery</span>
+            </a>
+            <a href="#locations" class="mobile-menu-link nav-link">
+                <span class="menu-icon">📍</span>
+                <span>Locations</span>
             </a>
             <a href="catalog.html" class="mobile-menu-link">
                 <span class="menu-icon">🛍️</span>
-                <span>Products</span>
-            </a>
-            <a href="#" class="mobile-menu-link">
-                <span class="menu-icon">📝</span>
-                <span>Blog</span>
-            </a>
-            <a href="#" class="mobile-menu-link">
-                <span class="menu-icon">ℹ️</span>
-                <span>About</span>
+                <span>Catalog</span>
             </a>
         </nav>
         <div class="mobile-menu-footer">
@@ -111,25 +201,62 @@
         </div>
     </div>
     <main>
-        <section class="section1">
-            <div class="section1-left">
+        <!-- Statistics Counter Section -->
+        <section class="stats-section scroll-animate" data-animation="fade-in-up">
+            <div class="stat-card">
+                <div class="stat-icon">🎧</div>
+                <div class="stat-number" data-count="15000">0</div>
+                <div class="stat-label">Products Sold</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-number" data-count="500">0</div>
+                <div class="stat-label">5-Star Reviews</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" data-count="25000">0</div>
+                <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏪</div>
+                <div class="stat-number" data-count="3">0</div>
+                <div class="stat-label">Store Locations</div>
+            </div>
+        </section>
+        
+        <section class="section1 parallax-section" id="home">
+            <!-- Parallax Background Layer (slowest) -->
+            <div class="parallax-layer parallax-bg-layer" data-parallax-speed="0.2">
+                <div class="parallax-shape shape-1"></div>
+                <div class="parallax-shape shape-2"></div>
+                <div class="parallax-shape shape-3"></div>
+            </div>
+            <!-- Parallax Middle Layer (includes reverse elements) -->
+            <div class="parallax-layer parallax-mid-layer" data-parallax-speed="0.5">
+                <div class="floating-icon icon-1" data-parallax-speed="0.3">🎧</div>
+                <div class="floating-icon icon-2" data-parallax-speed="-0.4">⭐</div>
+                <div class="floating-icon icon-3" data-parallax-speed="0.6">🎵</div>
+                <div class="floating-icon icon-4" data-parallax-speed="-0.3">🔊</div>
+            </div>
+            <div class="section1-left scroll-animate" data-animation="fade-in-left">
                 <div class="section1-left-top">
                     <h2>Discover Our Latest  Products</h2>
                     <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a product</p>
                     <button>Buy Now</button>
                 </div>
-                <div class="section1-left-bottom">
+                <div class="section1-left-bottom parallax-element" data-parallax-speed="0.8">
                     <img src="../images/15k.png" alt="">
                     <p>15k Well<br>Reviews</p>
                 </div>
             </div>
-            <div class="section1-right">
-                <div class="section1-right-left">
+            <div class="section1-right scroll-animate parallax-element" data-animation="fade-in-right" data-parallax-speed="1.0">
+                <div class="section1-right-left parallax-element" data-parallax-speed="0.7">
                     <img src="../images/playvideio.png" alt="">
                     <p>Play Video</p>
                 </div>
                 <div class="section1-right-right">
-                    <div class="section1-right-right-top"><img src="../images/star.png" alt=""></div>
+                    <div class="section1-right-right-top parallax-element" data-parallax-speed="-0.5"><img src="../images/star.png" alt=""></div>
                     <div class="product-card">
                         <div class="curved-text-container none">
                             <svg viewBox="0 0 300 120" class="curved-text">
@@ -148,14 +275,19 @@
                             <div class="product-price">$50</div>
                         </div>
                     </div>
-                    <div class="section1-right-right-bottom"><img src="../images/star.png" alt=""></div>
+                    <div class="section1-right-right-bottom parallax-element" data-parallax-speed="-0.6"><img src="../images/star.png" alt=""></div>
                 </div>
+            </div>
+            <!-- Parallax Foreground Layer (fastest) -->
+            <div class="parallax-layer parallax-fg-layer" data-parallax-speed="1.4">
+                <div class="parallax-decoration deco-1"></div>
+                <div class="parallax-decoration deco-2"></div>
             </div>
         </section>
         
         <!-- Hero Slider Section -->
-        <section class="hero-slider-section">
-            <h2>Featured Deals</h2>
+        <section class="hero-slider-section" id="deals">
+            <h2 class="scroll-animate" data-animation="fade-in-up">Featured Deals</h2>
             <div class="swiper hero-swiper">
                 <div class="swiper-wrapper">
                     <!-- Slide 1 -->
@@ -239,8 +371,8 @@
             </div>
         </section>
         
-        <section class="section2">
-            <div class="section2-left">
+        <section class="section2" id="featured">
+            <div class="section2-left scroll-animate" data-animation="fade-in-left">
                 <p>Apple wireless Airpod</p>
                 <div class="section2-left-imgs">
                     <img src="../images/apple1.png" alt="">
@@ -252,7 +384,7 @@
                     <b>$45.99</b>
                 </div>
             </div>
-            <div class="section2-right">
+            <div class="section2-right scroll-animate" data-animation="fade-in-right">
                 <h2>Our Featured Products</h2>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a product</p>
                 <div class="section2-right-buttons">
@@ -261,8 +393,8 @@
                 </div>
             </div>
         </section>
-        <section class="section3">
-            <h2>Top Sellers</h2>
+        <section class="section3" id="top-sellers">
+            <h2 class="scroll-animate" data-animation="fade-in-up">Top Sellers</h2>
             <div class="section3-buttons">
                 <button>Top Picks</button>
                 <button>Watches</button>
@@ -315,8 +447,8 @@
                 <img src="../images/rightarrow.png" alt="" class="arrow">            
             </div>
         </section>
-        <section class="section4">
-            <h2>Trending Earphones</h2>
+        <section class="section4" id="trending">
+            <h2 class="scroll-animate" data-animation="fade-in-up">Trending Earphones</h2>
             <div class="section4-buttons">
                 <button>Earbuds</button>
                 <button>Wireless</button>
@@ -370,8 +502,8 @@
                 <img src="../images/rightarrow.png" alt="" class="arrow">            
             </div>
         </section>
-        <section class="section5">
-            <h2>New Launches</h2>
+        <section class="section5" id="new-launches">
+            <h2 class="scroll-animate" data-animation="fade-in-up">New Launches</h2>
             <div class="section5-slider">
                 <img src="../images/arrowleft.png" alt="" class="arrow">
                 <div class="section5-slider-block">
@@ -398,7 +530,222 @@
                 <img src="../images/arrowright.png" alt="" class="arrow">
             </div>
         </section>
+        
+        <!-- Interactive Media Gallery -->
+        <section class="media-gallery-section" id="gallery">
+            <div class="gallery-header scroll-animate" data-animation="fade-in-up">
+                <h2>Interactive Product Gallery</h2>
+                <p>Click on any product to see and hear it in action</p>
+            </div>
+            
+            <div class="gallery-container">
+                <!-- Main Display Area -->
+                <div class="gallery-main-display">
+                    <div class="gallery-image-container">
+                        <img src="../images/rockerz.png" alt="Product" id="gallery-main-image" class="gallery-main-image">
+                        <div class="gallery-overlay">
+                            <div class="sound-wave" id="sound-wave">
+                                <span class="wave-bar"></span>
+                                <span class="wave-bar"></span>
+                                <span class="wave-bar"></span>
+                                <span class="wave-bar"></span>
+                                <span class="wave-bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3 id="gallery-product-name">Boat Rockerz 333</h3>
+                        <p id="gallery-product-desc">Click any product below to change the display</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Thumbnails Grid -->
+                <div class="gallery-thumbnails">
+                    <div class="gallery-thumb active" data-index="0" data-image="../images/rockerz.png" data-name="Boat Rockerz 333" data-desc="Premium wireless headphones with deep bass">
+                        <img src="../images/rockerz.png" alt="Boat Rockerz 333">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="1" data-image="../images/kerz.png" data-name="Boat Kerz 234" data-desc="Compact earbuds with noise cancellation">
+                        <img src="../images/kerz.png" alt="Boat Kerz 234">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="2" data-image="../images/roc.png" data-name="Boat Rockerz 323" data-desc="Comfortable over-ear headphones">
+                        <img src="../images/roc.png" alt="Boat Rockerz 323">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="3" data-image="../images/rockerz1.png" data-name="Boat Rockerz 555" data-desc="Wireless freedom with superior sound">
+                        <img src="../images/rockerz1.png" alt="Boat Rockerz 555">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="4" data-image="../images/kerz1.png" data-name="Boat Kerz 456" data-desc="Sleek design with powerful audio">
+                        <img src="../images/kerz1.png" alt="Boat Kerz 456">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="5" data-image="../images/roc1.png" data-name="Boat Rockerz 789" data-desc="Professional grade headphones">
+                        <img src="../images/roc1.png" alt="Boat Rockerz 789">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="6" data-image="../images/apple1.png" data-name="Apple AirPods Pro" data-desc="Premium wireless earbuds with ANC">
+                        <img src="../images/apple1.png" alt="Apple AirPods Pro">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="7" data-image="../images/apple2.png" data-name="Apple AirPods Max" data-desc="Over-ear headphones with spatial audio">
+                        <img src="../images/apple2.png" alt="Apple AirPods Max">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="8" data-image="../images/apple3.png" data-name="Apple AirPods Gen 3" data-desc="Latest generation wireless earbuds">
+                        <img src="../images/apple3.png" alt="Apple AirPods Gen 3">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="9" data-image="../images/img1air.png" data-name="Airdrop 500 ANC" data-desc="Active noise cancellation">
+                        <img src="../images/img1air.png" alt="Airdrop 500 ANC">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="10" data-image="../images/img2air.png" data-name="Airdrop Sport" data-desc="Water-resistant design for workouts">
+                        <img src="../images/img2air.png" alt="Airdrop Sport">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb" data-index="11" data-image="../images/product.png" data-name="Red Beats M19C22" data-desc="Iconic design with powerful bass">
+                        <img src="../images/product.png" alt="Red Beats">
+                        <div class="thumb-play-indicator">🔊</div>
+                    </div>
+                    <div class="gallery-thumb video-thumb" data-index="12" data-type="video">
+                        <img src="../images/playvideio.png" alt="Product Video">
+                        <div class="video-overlay">
+                            <div class="video-play-icon">▶</div>
+                            <span class="video-label">Watch Video</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Controls -->
+                <div class="gallery-controls">
+                    <button class="gallery-control-btn" id="gallery-prev">
+                        <span>←</span>
+                        <span>Previous</span>
+                    </button>
+                    <button class="gallery-control-btn random-btn" id="gallery-random">
+                        <span>🎲</span>
+                        <span>Random</span>
+                    </button>
+                    <button class="gallery-control-btn" id="gallery-next">
+                        <span>Next</span>
+                        <span>→</span>
+                    </button>
+                </div>
+
+                <!-- Audio Controls -->
+                <div class="audio-controls">
+                    <button class="play-pause-btn" id="play-pause-btn">
+                        <span class="play-icon">▶</span>
+                        <span class="pause-icon">⏸</span>
+                    </button>
+                    <div class="volume-control">
+                        <span class="volume-icon">🔊</span>
+                        <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
+                        <span class="volume-value" id="volume-value">50%</span>
+                    </div>
+                    <div class="player-status">
+                        <span class="status-indicator" id="status-indicator"></span>
+                        <span class="status-text" id="status-text">Ready</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Map Section -->
+        <section class="map-section" id="locations">
+            <div class="map-header scroll-animate" data-animation="fade-in-up">
+                <h2>Our Store Locations</h2>
+                <p>Visit us at one of our convenient locations</p>
+                <button class="map-fullscreen-btn" id="open-map-modal">
+                    <span>📍</span>
+                    <span>View Full Map</span>
+                </button>
+            </div>
+            <div class="map-container">
+                <div id="yandex-map" class="yandex-map"></div>
+                <div class="map-info-cards">
+                    <div class="store-card" data-coords="[55.751574, 37.573856]">
+                        <h3>🏪 Main Store - Moscow</h3>
+                        <p>📍 Red Square, 1, Moscow, Russia</p>
+                        <p>🕐 Mon-Sun: 9:00 - 21:00</p>
+                        <p>📞 +7 (495) 123-45-67</p>
+                        <button class="route-btn" data-store="main">Build Route</button>
+                    </div>
+                    <div class="store-card" data-coords="[59.934280, 30.335099]">
+                        <h3>🏪 Store #2 - St. Petersburg</h3>
+                        <p>📍 Nevsky Prospect, 28, St. Petersburg</p>
+                        <p>🕐 Mon-Sun: 10:00 - 22:00</p>
+                        <p>📞 +7 (812) 987-65-43</p>
+                        <button class="route-btn" data-store="spb">Build Route</button>
+                    </div>
+                    <div class="store-card" data-coords="[55.796127, 49.106414]">
+                        <h3>🏪 Store #3 - Kazan</h3>
+                        <p>📍 Bauman Street, 58, Kazan</p>
+                        <p>🕐 Mon-Sun: 10:00 - 20:00</p>
+                        <p>📞 +7 (843) 555-12-34</p>
+                        <button class="route-btn" data-store="kazan">Build Route</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+    
+    <!-- Video Modal -->
+    <div class="video-modal" id="video-modal">
+        <div class="video-modal-overlay" id="video-modal-overlay"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="video-modal-close" aria-label="Close video">✕</button>
+            <div class="video-container">
+                <video id="product-video" class="product-video" controls poster="../images/product.png">
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-info">
+                <h3>Product Showcase Video</h3>
+                <p>Discover our premium audio products in action</p>
+            </div>
+            <div class="custom-video-controls">
+                <button class="video-control-btn" id="video-play-pause">
+                    <span class="video-play-icon">▶</span>
+                    <span class="video-pause-icon">⏸</span>
+                </button>
+                <div class="video-progress-container">
+                    <input type="range" id="video-progress" class="video-progress-bar" min="0" max="100" value="0">
+                    <div class="video-time">
+                        <span id="current-time">0:00</span>
+                        <span>/</span>
+                        <span id="total-time">0:00</span>
+                    </div>
+                </div>
+                <div class="video-volume-control">
+                    <button class="video-mute-btn" id="video-mute">🔊</button>
+                    <input type="range" id="video-volume" class="video-volume-slider" min="0" max="100" value="70">
+                </div>
+                <button class="video-fullscreen-btn" id="video-fullscreen">⛶</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Map Modal -->
+    <div class="map-modal" id="map-modal">
+        <div class="map-modal-overlay" id="map-modal-overlay"></div>
+        <div class="map-modal-content">
+            <div class="map-modal-header">
+                <h2>Store Locations Map</h2>
+                <button class="map-modal-close" id="map-modal-close">✕</button>
+            </div>
+            <div id="yandex-map-modal" class="yandex-map-modal"></div>
+            <div class="map-modal-controls">
+                <button class="map-control-btn" id="zoom-in">+</button>
+                <button class="map-control-btn" id="zoom-out">−</button>
+                <button class="map-control-btn" id="reset-map">🏠</button>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-top">
             <p>Ready to get started?</p>
@@ -449,7 +796,15 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../scripts/preloader.js"></script>
+    <script src="../scripts/toast-notifications.js"></script>
+    <script src="../scripts/smooth-scroll.js"></script>
+    <script src="../scripts/scroll-animations.js"></script>
+    <script src="../scripts/parallax.js"></script>
     <script src="../scripts/burger-menu.js"></script>
+    <script src="../scripts/product-modal.js"></script>
+    <script src="../scripts/media-gallery.js"></script>
+    <script src="../scripts/video-player.js"></script>
+    <script src="../scripts/map.js"></script>
     <script src="../scripts/slider.js"></script>
 </body>
 </html>

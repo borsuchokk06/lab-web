@@ -93,10 +93,18 @@
 
     // 4. Клик по ссылкам в меню - закрываем меню
     mobileMenuLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(e) {
             console.log('Menu link clicked, closing menu...');
-            // Небольшая задержка для плавности перед переходом
-            setTimeout(closeMenu, 100);
+            
+            // If it's an anchor link (smooth scroll), close menu after delay
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                // Небольшая задержка для плавности
+                setTimeout(closeMenu, 300);
+            } else {
+                // External link - close immediately
+                setTimeout(closeMenu, 100);
+            }
         });
     });
 

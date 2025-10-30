@@ -169,7 +169,20 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('product-slide-btn')) {
             e.preventDefault();
-            alert('Product added to cart!');
+            
+            // Get product info from slider card
+            const slideCard = e.target.closest('.product-slide-card');
+            if (slideCard) {
+                const productName = slideCard.querySelector('h4')?.textContent || 'Product';
+                const productImage = slideCard.querySelector('.product-slide-image img')?.src || null;
+                
+                // Show toast notification
+                if (typeof notifyProductAdded === 'function') {
+                    notifyProductAdded(productName, 1, productImage);
+                } else {
+                    alert('Product added to cart!');
+                }
+            }
         }
     });
     

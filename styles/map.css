@@ -1,0 +1,394 @@
+/* ==================== MAP SECTION ==================== */
+
+.map-section {
+    width: 100%;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.map-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.map-header h2 {
+    font-size: 3em;
+    color: #333;
+    margin: 0;
+}
+
+.map-header p {
+    font-size: 1.3em;
+    color: #666;
+    margin: 0;
+}
+
+.map-fullscreen-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: #10B981;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.map-fullscreen-btn:hover {
+    background: #0ea071;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.map-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Yandex Map */
+.yandex-map {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Store Cards */
+.map-info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.store-card {
+    background: white;
+    padding: 1.8rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.store-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-color: #10B981;
+}
+
+.store-card h3 {
+    font-size: 1.4em;
+    color: #333;
+    margin: 0 0 1rem 0;
+}
+
+.store-card p {
+    font-size: 1em;
+    color: #666;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.route-btn {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: 2px solid #10B981;
+    color: #10B981;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.route-btn:hover {
+    background: #10B981;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* ==================== MAP MODAL ==================== */
+
+.map-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.map-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.map-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.map-modal-content {
+    position: relative;
+    width: 95%;
+    height: 90vh;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.map-modal.active .map-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.map-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+}
+
+.map-modal-header h2 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.map-modal-close {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.map-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.yandex-map-modal {
+    width: 100%;
+    height: calc(100% - 80px);
+}
+
+/* Map Controls */
+.map-modal-controls {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1000;
+}
+
+.map-control-btn {
+    width: 45px;
+    height: 45px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-control-btn:hover {
+    background: #10B981;
+    color: white;
+    border-color: #10B981;
+    transform: scale(1.1);
+}
+
+/* Body lock when modal is open */
+body.map-modal-open {
+    overflow: hidden;
+}
+
+/* ==================== CUSTOM MAP MARKERS ==================== */
+
+/* These styles will be applied to balloon content */
+.custom-balloon {
+    padding: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.custom-balloon h4 {
+    font-size: 1.2em;
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.custom-balloon p {
+    font-size: 0.9em;
+    margin: 0.3rem 0;
+    color: #666;
+}
+
+.custom-balloon button {
+    margin-top: 0.8rem;
+    padding: 0.5rem 1rem;
+    background: #10B981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 1024px) {
+    .map-container {
+        grid-template-columns: 1fr;
+    }
+
+    .yandex-map {
+        height: 400px;
+    }
+
+    .map-info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .map-header h2 {
+        font-size: 2.5em;
+    }
+
+    .map-header p {
+        font-size: 1.1em;
+    }
+
+    .yandex-map {
+        height: 350px;
+        border-radius: 15px;
+    }
+
+    .store-card {
+        padding: 1.5rem;
+    }
+
+    .store-card h3 {
+        font-size: 1.2em;
+    }
+
+    .map-modal-content {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .map-modal-header {
+        padding: 1rem 1.5rem;
+    }
+
+    .map-modal-header h2 {
+        font-size: 1.4em;
+    }
+
+    .map-modal-controls {
+        top: 90px;
+        right: 10px;
+    }
+
+    .map-control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-section {
+        padding: 2rem 1rem;
+    }
+
+    .map-header h2 {
+        font-size: 2em;
+    }
+
+    .map-fullscreen-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+    }
+
+    .yandex-map {
+        height: 300px;
+    }
+
+    .store-card {
+        padding: 1.2rem;
+    }
+
+    .store-card h3 {
+        font-size: 1.1em;
+    }
+
+    .store-card p {
+        font-size: 0.9em;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .map-modal-content,
+    .map-fullscreen-btn:hover,
+    .route-btn:hover,
+    .store-card:hover,
+    .map-control-btn:hover,
+    .map-modal-close:hover {
+        transform: none;
+    }
+}
+

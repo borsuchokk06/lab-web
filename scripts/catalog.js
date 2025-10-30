@@ -622,7 +622,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Обработка кликов на кнопки "Add to Cart" ===
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('product-catalog-card-button') && !e.target.disabled) {
-            alert('Product added to cart!');
+            // Get product info from the card
+            const card = e.target.closest('.product-catalog-card');
+            if (card) {
+                const productName = card.querySelector('.product-catalog-card-title')?.textContent || 'Product';
+                const productImage = card.querySelector('.product-catalog-card-image img')?.src || null;
+                
+                // Show toast notification
+                if (typeof notifyProductAdded === 'function') {
+                    notifyProductAdded(productName, 1, productImage);
+                } else {
+                    alert('Product added to cart!');
+                }
+            }
         }
     });
 });

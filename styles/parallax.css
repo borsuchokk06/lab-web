@@ -1,0 +1,115 @@
+/* ==================== PARALLAX EFFECT STYLES ==================== */
+
+.parallax-section {
+    position: relative;
+    overflow: hidden; /* hide overflow from moving layers */
+}
+
+/* Generic parallax layer wrapper */
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* allow clicks to pass through */
+}
+
+/* Background layer - subtle gradient decorations */
+.parallax-bg-layer {
+    z-index: 0;
+}
+
+.parallax-bg-layer .parallax-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    filter: blur(10px);
+}
+
+.parallax-bg-layer .shape-1 {
+    width: 400px;
+    height: 400px;
+    background: #10B981;
+    top: -100px;
+    left: -80px;
+}
+
+.parallax-bg-layer .shape-2 {
+    width: 300px;
+    height: 300px;
+    background: #845EC2;
+    right: -120px;
+    bottom: -80px;
+}
+
+.parallax-bg-layer .shape-3 {
+    width: 220px;
+    height: 220px;
+    background: #4484FF;
+    left: 30%;
+    top: -60px;
+}
+
+/* Mid layer - floating icons with different speeds (some reverse) */
+.parallax-mid-layer {
+    z-index: 2;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 2.2em;
+    opacity: 0.45;
+    user-select: none;
+}
+
+.floating-icon.icon-1 { left: 8%; top: 20%; }
+.floating-icon.icon-2 { right: 10%; top: 30%; }
+.floating-icon.icon-3 { left: 15%; bottom: 18%; }
+.floating-icon.icon-4 { right: 18%; bottom: 25%; }
+
+/* Foreground layer small decorations */
+.parallax-fg-layer {
+    z-index: 4;
+}
+
+.parallax-decoration {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.parallax-fg-layer .deco-1 { left: 5%; bottom: 10%; }
+.parallax-fg-layer .deco-2 { right: 8%; top: 12%; }
+
+/* Elements inside content that also move */
+.parallax-element {
+    will-change: transform;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+    .floating-icon { font-size: 1.8em; }
+    .parallax-decoration { width: 110px; height: 110px; }
+    .parallax-bg-layer .shape-1 { width: 320px; height: 320px; }
+    .parallax-bg-layer .shape-2 { width: 240px; height: 240px; }
+}
+
+@media (max-width: 768px) {
+    /* Soften parallax visuals on smaller screens */
+    .floating-icon { display: none; }
+    .parallax-decoration { opacity: 0.08; }
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+@media (prefers-reduced-motion: reduce) {
+    .parallax-layer,
+    .parallax-element {
+        transform: none !important;
+        transition: none !important;
+    }
+}

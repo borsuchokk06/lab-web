@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalog - Shopper</title>
+    <link rel="icon" type="image/png" href="../images/product.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../images/product.png">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../styles/footer.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -12,6 +14,10 @@
     <link rel="stylesheet" href="../styles/preloader.css">
     <link rel="stylesheet" href="../styles/slider.css">
     <link rel="stylesheet" href="../styles/burger-menu.css">
+    <link rel="stylesheet" href="../styles/product-modal.css">
+    <link rel="stylesheet" href="../styles/toast-notifications.css">
+    <link rel="stylesheet" href="../styles/smooth-scroll.css">
+    <link rel="stylesheet" href="../styles/scroll-animations.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,8 +73,71 @@
         </div>
     </header>
     
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <span>↑</span>
+    </button>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+    
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+    
+    <!-- Product Modal -->
+    <div class="product-modal" id="product-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close modal">✕</button>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <div class="modal-badge" id="modal-badge"></div>
+                    <img src="" alt="" id="modal-image" class="modal-product-image">
+                    <div class="modal-gallery">
+                        <img src="" alt="" class="modal-gallery-thumb active" data-index="0">
+                        <img src="" alt="" class="modal-gallery-thumb" data-index="1">
+                        <img src="" alt="" class="modal-gallery-thumb" data-index="2">
+                    </div>
+                </div>
+                <div class="modal-info-section">
+                    <div class="modal-category" id="modal-category"></div>
+                    <h2 class="modal-title" id="modal-title"></h2>
+                    <div class="modal-rating">
+                        <img src="../images/stars.png" alt="rating" class="modal-stars">
+                        <span id="modal-reviews"></span>
+                    </div>
+                    <p class="modal-description" id="modal-description"></p>
+                    <div class="modal-price-section">
+                        <div class="modal-price" id="modal-price"></div>
+                        <div class="modal-stock" id="modal-stock"></div>
+                    </div>
+                    <div class="modal-features">
+                        <h3>Key Features:</h3>
+                        <ul id="modal-features-list">
+                            <li>Premium sound quality</li>
+                            <li>Wireless connectivity</li>
+                            <li>Long battery life</li>
+                            <li>Comfortable design</li>
+                        </ul>
+                    </div>
+                    <div class="modal-actions">
+                        <div class="modal-quantity">
+                            <button class="qty-btn minus" id="qty-minus">−</button>
+                            <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="10">
+                            <button class="qty-btn plus" id="qty-plus">+</button>
+                        </div>
+                        <button class="modal-add-to-cart" id="modal-add-to-cart">
+                            <img src="../images/Shopping-bag.png" alt="">
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobile-menu">
@@ -391,7 +460,11 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../scripts/preloader.js"></script>
+    <script src="../scripts/toast-notifications.js"></script>
+    <script src="../scripts/smooth-scroll.js"></script>
+    <script src="../scripts/scroll-animations.js"></script>
     <script src="../scripts/burger-menu.js"></script>
+    <script src="../scripts/product-modal.js"></script>
     <script src="../scripts/slider.js"></script>
     <script src="../scripts/catalog.js"></script>
 </body>
