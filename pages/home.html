@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/preloader.css">
+    <link rel="stylesheet" href="../styles/slider.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -97,6 +100,93 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Hero Slider Section -->
+        <section class="hero-slider-section">
+            <h2>Featured Deals</h2>
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="hero-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="hero-slide-content">
+                                <span class="hero-badge">NEW ARRIVAL</span>
+                                <h3>Premium Wireless Headphones</h3>
+                                <p>Experience crystal clear sound with our latest collection</p>
+                                <div class="hero-price">
+                                    <span class="old-price">$99.99</span>
+                                    <span class="new-price">$79.99</span>
+                                </div>
+                                <button class="hero-btn" onclick="window.location.href='catalog.html'">Shop Now</button>
+                            </div>
+                            <div class="hero-slide-image">
+                                <img src="../images/rockerz.png" alt="Premium Headphones">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="hero-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="hero-slide-content">
+                                <span class="hero-badge">HOT DEAL</span>
+                                <h3>Apple AirPods Collection</h3>
+                                <p>The perfect blend of style and performance</p>
+                                <div class="hero-price">
+                                    <span class="old-price">$49.99</span>
+                                    <span class="new-price">$39.99</span>
+                                </div>
+                                <button class="hero-btn" onclick="window.location.href='catalog.html'">Shop Now</button>
+                            </div>
+                            <div class="hero-slide-image">
+                                <img src="../images/apple1.png" alt="Apple AirPods">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="hero-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="hero-slide-content">
+                                <span class="hero-badge">BEST SELLER</span>
+                                <h3>Professional Gaming Headset</h3>
+                                <p>Immersive 7.1 surround sound for gamers</p>
+                                <div class="hero-price">
+                                    <span class="old-price">$89.99</span>
+                                    <span class="new-price">$69.99</span>
+                                </div>
+                                <button class="hero-btn" onclick="window.location.href='catalog.html'">Shop Now</button>
+                            </div>
+                            <div class="hero-slide-image">
+                                <img src="../images/roc.png" alt="Gaming Headset">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="hero-slide" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <div class="hero-slide-content">
+                                <span class="hero-badge">LIMITED TIME</span>
+                                <h3>Sport Wireless Earbuds</h3>
+                                <p>Water-resistant design perfect for your workouts</p>
+                                <div class="hero-price">
+                                    <span class="old-price">$59.99</span>
+                                    <span class="new-price">$44.99</span>
+                                </div>
+                                <button class="hero-btn" onclick="window.location.href='catalog.html'">Shop Now</button>
+                            </div>
+                            <div class="hero-slide-image">
+                                <img src="../images/kerz.png" alt="Sport Earbuds">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation buttons -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+        
         <section class="section2">
             <div class="section2-left">
                 <p>Apple wireless Airpod</p>
@@ -304,6 +394,9 @@
             </div>
         </div>
     </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../scripts/preloader.js"></script>
+    <script src="../scripts/slider.js"></script>
 </body>
 </html>

@@ -1,0 +1,451 @@
+/* ==================== HERO SLIDER (Home Page) ==================== */
+.hero-slider-section {
+    width: 100%;
+    padding: 4rem 2rem;
+    background: #f8f9fa;
+}
+
+.hero-slider-section h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+.hero-swiper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.hero-slide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem;
+    min-height: 500px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.hero-slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 50%;
+    color: white;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-slide-content h3 {
+    font-size: 3em;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-slide-content p {
+    font-size: 1.3em;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.hero-price {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.old-price {
+    font-size: 1.5em;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.new-price {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.hero-btn {
+    padding: 1.2rem 3rem;
+    background: white;
+    color: #333;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-slide-image {
+    position: relative;
+    z-index: 2;
+    max-width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slide-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Swiper Navigation Buttons */
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+    background: rgba(255, 255, 255, 0.9);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-swiper .swiper-button-next:after,
+.hero-swiper .swiper-button-prev:after {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.hero-swiper .swiper-button-next:hover,
+.hero-swiper .swiper-button-prev:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+/* Swiper Pagination */
+.hero-swiper .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: white;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    width: 30px;
+    border-radius: 6px;
+    opacity: 1;
+    background: white;
+}
+
+/* ==================== PRODUCT SLIDER (Catalog Page) ==================== */
+.product-slider-section {
+    width: 100%;
+    padding: 5rem 2rem;
+    background: white;
+}
+
+.product-slider-section h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.slider-description {
+    text-align: center;
+    font-size: 1.3em;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.product-swiper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.product-slide-card {
+    background: white;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-slide-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-slide-image {
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 250px;
+}
+
+.product-slide-image img {
+    max-width: 80%;
+    max-height: 200px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-slide-card:hover .product-slide-image img {
+    transform: scale(1.1);
+}
+
+.slide-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+}
+
+.slide-badge.hot {
+    background: #FF6B6B;
+}
+
+.slide-badge.new {
+    background: #845EC2;
+}
+
+.product-slide-info {
+    padding: 1.5rem;
+    background: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-slide-info h4 {
+    font-size: 1.4em;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.product-slide-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-slide-rating img {
+    width: 80px;
+    height: auto;
+}
+
+.product-slide-rating span {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.product-slide-price {
+    font-size: 2em;
+    font-weight: bold;
+    color: #10B981;
+    margin-bottom: 1.5rem;
+}
+
+.product-slide-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #10B981;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.product-slide-btn:hover {
+    background: #0ea071;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Product Swiper Navigation */
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+    background: #10B981;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+.product-swiper .swiper-button-next:after,
+.product-swiper .swiper-button-prev:after {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.product-swiper .swiper-button-next:hover,
+.product-swiper .swiper-button-prev:hover {
+    background: #0ea071;
+    transform: scale(1.1);
+}
+
+/* Product Swiper Pagination */
+.product-swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #10B981;
+    opacity: 0.3;
+}
+
+.product-swiper .swiper-pagination-bullet-active {
+    width: 25px;
+    border-radius: 5px;
+    opacity: 1;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1024px) {
+    .hero-slide {
+        flex-direction: column;
+        padding: 3rem 2rem;
+        min-height: 600px;
+    }
+
+    .hero-slide-content {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .hero-slide-content h3 {
+        font-size: 2.5em;
+    }
+
+    .hero-slide-image {
+        max-width: 60%;
+    }
+
+    .hero-price {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-slider-section h2 {
+        font-size: 2em;
+    }
+
+    .hero-slide {
+        padding: 2rem 1.5rem;
+        min-height: 500px;
+    }
+
+    .hero-slide-content h3 {
+        font-size: 2em;
+    }
+
+    .hero-slide-content p {
+        font-size: 1.1em;
+    }
+
+    .hero-price {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .old-price {
+        font-size: 1.2em;
+    }
+
+    .new-price {
+        font-size: 2em;
+    }
+
+    .hero-btn {
+        padding: 1rem 2rem;
+        font-size: 1em;
+    }
+
+    .hero-slide-image {
+        max-width: 80%;
+    }
+
+    .product-slider-section h2 {
+        font-size: 2em;
+    }
+
+    .slider-description {
+        font-size: 1.1em;
+    }
+
+    .product-slide-info h4 {
+        font-size: 1.2em;
+    }
+
+    .product-slide-price {
+        font-size: 1.6em;
+    }
+
+    .hero-swiper .swiper-button-next,
+    .hero-swiper .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hero-swiper .swiper-button-next:after,
+    .hero-swiper .swiper-button-prev:after {
+        font-size: 16px;
+    }
+}
+

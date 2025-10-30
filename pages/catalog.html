@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/catalog.css">
     <link rel="stylesheet" href="../styles/preloader.css">
+    <link rel="stylesheet" href="../styles/slider.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -164,6 +167,127 @@
             
             <div id="catalog-container"></div>
         </section>
+        
+        <!-- Product Slider Section -->
+        <section class="product-slider-section">
+            <h2>Trending Products</h2>
+            <p class="slider-description">Check out our most popular audio products</p>
+            <div class="swiper product-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Product Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-green">
+                                <span class="slide-badge hot">Hot</span>
+                                <img src="../images/rockerz.png" alt="Boat Rockerz 333">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Boat Rockerz 333</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>75 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$20</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Slide 2 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-blue">
+                                <span class="slide-badge new">New</span>
+                                <img src="../images/kerz.png" alt="Boat Kerz 234">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Boat Kerz 234</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>75 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$40</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Slide 3 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-purple">
+                                <img src="../images/roc.png" alt="Boat Rockerz 323">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Boat Rockerz 323</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>75 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$30</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Slide 4 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-pink">
+                                <span class="slide-badge hot">Hot</span>
+                                <img src="../images/apple1.png" alt="Apple AirPods">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Apple AirPods Pro</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>120 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$45.99</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Slide 5 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-yellow">
+                                <img src="../images/apple2.png" alt="Apple AirPods Max">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Apple AirPods Max</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>95 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$45.99</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Slide 6 -->
+                    <div class="swiper-slide">
+                        <div class="product-slide-card">
+                            <div class="product-slide-image bg-lightblue">
+                                <span class="slide-badge hot">Hot</span>
+                                <img src="../images/product.png" alt="Red Beats">
+                            </div>
+                            <div class="product-slide-info">
+                                <h4>Red Beats M19C22</h4>
+                                <div class="product-slide-rating">
+                                    <img src="../images/stars.png" alt="rating">
+                                    <span>150 Reviews</span>
+                                </div>
+                                <p class="product-slide-price">$50</p>
+                                <button class="product-slide-btn">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
     </main>
     <footer>
         <div class="footer-top">
@@ -212,7 +336,10 @@
             </div>
         </div>
     </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../scripts/preloader.js"></script>
+    <script src="../scripts/slider.js"></script>
     <script src="../scripts/catalog.js"></script>
 </body>
 </html>
