@@ -182,10 +182,24 @@ const products = [
     }
 ];
 
+// Глобальные переменные для хранения состояния фильтров
+let currentSearchTerm = '';
+let currentSortOption = 'default';
+let currentCategories = ['all'];
+
 // Функция для генерации карточек товаров
 function generateProductCards(productsArray) {
     const container = document.getElementById('catalog-container');
     container.innerHTML = ''; // Очистка контейнера
+
+    // Обновление счетчика результатов
+    updateResultsCounter(productsArray.length);
+
+    // Проверка на пустой массив
+    if (productsArray.length === 0) {
+        showEmptyState();
+        return;
+    }
 
     productsArray.forEach(product => {
         // Создание карточки товара
@@ -230,7 +244,154 @@ function generateProductCards(productsArray) {
     });
 }
 
-// Функция фильтрации товаров
+// Функция отображения пустого состояния
+function showEmptyState() {
+    const container = document.getElementById('catalog-container');
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.innerHTML = `
+        <div class="empty-state-icon">🔍</div>
+        <h2>No Products Found</h2>
+        <p>We couldn't find any products matching your criteria. Try adjusting your search terms or filters.</p>
+        <button onclick="resetAllFilters()">Clear All Filters</button>
+    `;
+    container.appendChild(emptyState);
+}
+
+// Функция обновления счетчика результатов
+function updateResultsCounter(count) {
+    const counter = document.getElementById('results-counter');
+    if (count === 0) {
+        counter.innerHTML = 'No products found';
+    } else {
+        counter.innerHTML = `Showing <strong>${count}</strong> product${count !== 1 ? 's' : ''}`;
+    }
+}
+
+// Основная функция применения всех фильтров
+function applyAllFilters() {
+    let filteredProducts = [...products];
+
+    // 1. Применение фильтра по категориям
+    if (!currentCategories.includes('all')) {
+        filteredProducts = filteredProducts.filter(product => 
+            currentCategories.includes(product.category)
+        );
+    }
+
+    // 2. Применение поиска по названию и описанию
+    if (currentSearchTerm.trim() !== '') {
+        const searchLower = currentSearchTerm.toLowerCase();
+        filteredProducts = filteredProducts.filter(product => 
+            product.name.toLowerCase().includes(searchLower) ||
+            product.description.toLowerCase().includes(searchLower)
+        );
+    }
+
+    // 3. Применение сортировки
+    filteredProducts = applySorting(filteredProducts, currentSortOption);
+
+    // 4. Генерация карточек
+    generateProductCards(filteredProducts);
+}
+
+// Функция поиска товаров
+function searchProducts(searchTerm) {
+    currentSearchTerm = searchTerm;
+    applyAllFilters();
+    
+    // Показать/скрыть кнопку очистки
+    const clearButton = document.getElementById('clear-search');
+    if (searchTerm.trim() !== '') {
+        clearButton.classList.add('visible');
+    } else {
+        clearButton.classList.remove('visible');
+    }
+}
+
+// Функция сортировки товаров
+function applySorting(productsArray, sortOption) {
+    const sorted = [...productsArray];
+    
+    switch(sortOption) {
+        case 'name-asc':
+            return sorted.sort((a, b) => a.name.localeCompare(b.name));
+        case 'name-desc':
+            return sorted.sort((a, b) => b.name.localeCompare(a.name));
+        case 'price-asc':
+            return sorted.sort((a, b) => a.price - b.price);
+        case 'price-desc':
+            return sorted.sort((a, b) => b.price - a.price);
+        case 'reviews-asc':
+            return sorted.sort((a, b) => a.reviews - b.reviews);
+        case 'reviews-desc':
+            return sorted.sort((a, b) => b.reviews - a.reviews);
+        case 'default':
+        default:
+            return sorted;
+    }
+}
+
+// Функция обработки изменения сортировки
+function handleSortChange(sortOption) {
+    currentSortOption = sortOption;
+    applyAllFilters();
+}
+
+// Функция обработки изменения категорий
+function handleCategoryChange() {
+    const checkboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+    const allCheckbox = document.getElementById('cat-all');
+    
+    // Получение выбранных категорий
+    const selectedCategories = [];
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked && checkbox.value !== 'all') {
+            selectedCategories.push(checkbox.value);
+        }
+    });
+    
+    // Если выбран "All" или ничего не выбрано
+    if (allCheckbox.checked || selectedCategories.length === 0) {
+        currentCategories = ['all'];
+        // Снять все остальные чекбоксы
+        checkboxes.forEach(checkbox => {
+            if (checkbox.value !== 'all') {
+                checkbox.checked = false;
+            }
+        });
+        allCheckbox.checked = true;
+    } else {
+        currentCategories = selectedCategories;
+        allCheckbox.checked = false;
+    }
+    
+    applyAllFilters();
+}
+
+// Функция сброса всех фильтров
+function resetAllFilters() {
+    // Сброс поиска
+    currentSearchTerm = '';
+    document.getElementById('search-input').value = '';
+    document.getElementById('clear-search').classList.remove('visible');
+    
+    // Сброс сортировки
+    currentSortOption = 'default';
+    document.getElementById('sort-select').value = 'default';
+    
+    // Сброс категорий
+    currentCategories = ['all'];
+    document.getElementById('cat-all').checked = true;
+    document.getElementById('cat-headphones').checked = false;
+    document.getElementById('cat-earbuds').checked = false;
+    document.getElementById('cat-wireless').checked = false;
+    
+    // Применение фильтров
+    applyAllFilters();
+}
+
+// Старая функция фильтрации товаров (для обратной совместимости)
 function filterProducts(category) {
     if (category === 'all') {
         generateProductCards(products);
@@ -377,25 +538,62 @@ function applyArrayMethod(method) {
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     // Генерация всех карточек товаров
-    generateProductCards(products);
+    applyAllFilters();
 
-    // Обработка кликов на кнопки фильтров категорий
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Удаление активного класса у всех кнопок
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            // Добавление активного класса на нажатую кнопку
-            button.classList.add('active');
-            // Фильтрация товаров
-            const category = button.getAttribute('data-category');
-            filterProducts(category);
-            // Сброс информации о методе
-            document.getElementById('method-info').textContent = 'Select a method to see the results';
-        });
+    // === НОВАЯ ФУНКЦИОНАЛЬНОСТЬ: Поиск ===
+    const searchInput = document.getElementById('search-input');
+    const clearSearchButton = document.getElementById('clear-search');
+    
+    // Поиск при вводе текста (с небольшой задержкой)
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            searchProducts(e.target.value);
+        }, 300); // Задержка 300мс для оптимизации
+    });
+    
+    // Очистка поиска
+    clearSearchButton.addEventListener('click', () => {
+        searchInput.value = '';
+        searchProducts('');
     });
 
-    // Обработка кликов на кнопки методов массивов
+    // === НОВАЯ ФУНКЦИОНАЛЬНОСТЬ: Сортировка ===
+    const sortSelect = document.getElementById('sort-select');
+    sortSelect.addEventListener('change', (e) => {
+        handleSortChange(e.target.value);
+    });
+
+    // === НОВАЯ ФУНКЦИОНАЛЬНОСТЬ: Фильтрация по категориям ===
+    const categoryCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+    const allCheckbox = document.getElementById('cat-all');
+    
+    // Обработка чекбокса "All"
+    allCheckbox.addEventListener('change', () => {
+        if (allCheckbox.checked) {
+            categoryCheckboxes.forEach(checkbox => {
+                if (checkbox.value !== 'all') {
+                    checkbox.checked = false;
+                }
+            });
+        }
+        handleCategoryChange();
+    });
+    
+    // Обработка остальных чекбоксов
+    categoryCheckboxes.forEach(checkbox => {
+        if (checkbox.value !== 'all') {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    allCheckbox.checked = false;
+                }
+                handleCategoryChange();
+            });
+        }
+    });
+
+    // === СТАРАЯ ФУНКЦИОНАЛЬНОСТЬ: Кнопки методов массивов ===
     const methodButtons = document.querySelectorAll('.method-btn');
     methodButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -405,13 +603,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Добавление визуального эффекта активной кнопки
             methodButtons.forEach(btn => btn.style.borderColor = '#e0e0e0');
             button.style.borderColor = '#10B981';
-            
-            // Сброс активного фильтра категории
-            filterButtons.forEach(btn => btn.classList.remove('active'));
         });
     });
 
-    // Обработка клика на кнопку сброса
+    // Обработка клика на кнопку сброса методов
     const resetButton = document.getElementById('reset-catalog');
     resetButton.addEventListener('click', () => {
         // Восстановление исходного каталога
@@ -420,15 +615,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Сброс активного состояния всех кнопок методов
         methodButtons.forEach(btn => btn.style.borderColor = '#e0e0e0');
         
-        // Восстановление активного состояния фильтра "All Products"
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        filterButtons[0].classList.add('active');
-        
         // Сброс информации о методе
         document.getElementById('method-info').textContent = 'Select a method to see the results';
     });
 
-    // Обработка кликов на кнопки "Add to Cart"
+    // === Обработка кликов на кнопки "Add to Cart" ===
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('product-catalog-card-button') && !e.target.disabled) {
             alert('Product added to cart!');
