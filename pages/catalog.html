@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../styles/catalog.css">
     <link rel="stylesheet" href="../styles/preloader.css">
     <link rel="stylesheet" href="../styles/slider.css">
+    <link rel="stylesheet" href="../styles/burger-menu.css">
     <link rel="stylesheet" href="../styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +49,12 @@
                 <button class="header-top-buttons1"><img src="../images/Shopping-bag.png" alt=""> 0 Items Added</button>
                 <button class="header-top-buttons2"><img src="../images/Profile.png" alt=""> Login or Sign Up</button>
             </div>
+            <!-- Burger Menu Button -->
+            <button class="burger-menu-btn" id="burger-btn" aria-label="Toggle menu">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
         </div>
         <div class="header-bottom">
             <nav>
@@ -59,6 +66,51 @@
             </nav>
         </div>
     </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h2 class="mobile-menu-logo">
+                <span class="shop">Shop</span><span class="per">per</span>
+            </h2>
+            <button class="mobile-menu-close" id="mobile-close" aria-label="Close menu">✕</button>
+        </div>
+        <nav class="mobile-menu-nav">
+            <a href="home.html" class="mobile-menu-link">
+                <span class="menu-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="#" class="mobile-menu-link">
+                <span class="menu-icon">⭐</span>
+                <span>Features</span>
+            </a>
+            <a href="catalog.html" class="mobile-menu-link">
+                <span class="menu-icon">🛍️</span>
+                <span>Products</span>
+            </a>
+            <a href="#" class="mobile-menu-link">
+                <span class="menu-icon">📝</span>
+                <span>Blog</span>
+            </a>
+            <a href="#" class="mobile-menu-link">
+                <span class="menu-icon">ℹ️</span>
+                <span>About</span>
+            </a>
+        </nav>
+        <div class="mobile-menu-footer">
+            <button class="mobile-cart-btn">
+                <img src="../images/Shopping-bag.png" alt="">
+                <span>Cart (0)</span>
+            </button>
+            <button class="mobile-login-btn">
+                <img src="../images/Profile.png" alt="">
+                <span>Login</span>
+            </button>
+        </div>
+    </div>
     <main>
         <section class="catalog-section">
             <h1>Product Catalog</h1>
@@ -339,6 +391,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../scripts/preloader.js"></script>
+    <script src="../scripts/burger-menu.js"></script>
     <script src="../scripts/slider.js"></script>
     <script src="../scripts/catalog.js"></script>
 </body>
