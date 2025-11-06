@@ -1,11 +1,11 @@
-// Slider initialization
+// Инициализация слайдера
 // Используем Swiper.js - библиотека с открытым исходным кодом (без jQuery)
 // GitHub: https://github.com/nolimits4web/swiper
 // Лицензия: MIT
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ==================== HERO SLIDER (Home Page) ====================
+    // ==================== ГЛАВНЫЙ СЛАЙДЕР (Главная страница) ====================
     const heroSwiperElement = document.querySelector('.hero-swiper');
     
     if (heroSwiperElement) {
@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Управление мышью (drag)
             mousewheel: false, // Отключить прокрутку колесом мыши
             
-            // Accessibility
+            // Доступность
             a11y: {
                 enabled: true,
-                prevSlideMessage: 'Previous slide',
-                nextSlideMessage: 'Next slide',
+                prevSlideMessage: 'Предыдущий слайд',
+                nextSlideMessage: 'Следующий слайд',
             },
             
             // Анимации при смене слайда
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // ==================== PRODUCT SLIDER (Catalog Page) ====================
+    // ==================== СЛАЙДЕР ТОВАРОВ (Страница каталога) ====================
     const productSwiperElement = document.querySelector('.product-swiper');
     
     if (productSwiperElement) {
@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Центрирование активного слайда
             centeredSlides: false,
             
-            // Grab cursor
+            // Курсор захвата
             grabCursor: true,
             
-            // Адаптивные breakpoints
+            // Адаптивные точки останова
             breakpoints: {
                 // Когда ширина >= 640px
                 640: {
@@ -164,23 +164,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Обработка кликов на кнопки "Add to Cart" в слайдере
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('product-slide-btn')) {
             e.preventDefault();
             
-            // Get product info from slider card
+            // Получить информацию о товаре из карточки слайдера
             const slideCard = e.target.closest('.product-slide-card');
             if (slideCard) {
-                const productName = slideCard.querySelector('h4')?.textContent || 'Product';
+                const productName = slideCard.querySelector('h4')?.textContent || 'Товар';
                 const productImage = slideCard.querySelector('.product-slide-image img')?.src || null;
                 
-                // Show toast notification
+                // Показать уведомление
                 if (typeof notifyProductAdded === 'function') {
                     notifyProductAdded(productName, 1, productImage);
                 } else {
-                    alert('Product added to cart!');
+                    alert('Товар добавлен в корзину!');
                 }
             }
         }

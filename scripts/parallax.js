@@ -1,8 +1,8 @@
-// Parallax Effect Script
+// Скрипт эффекта параллакса
 (function() {
     'use strict';
 
-    // Skip parallax if user prefers reduced motion
+    // Пропустить параллакс, если пользователь предпочитает уменьшенное движение
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {
         console.log('Parallax disabled (prefers-reduced-motion)');
@@ -12,16 +12,16 @@
     let ticking = false;
     let lastScrollY = window.pageYOffset;
 
-    // Cache parallax elements
+    // Кэширование элементов параллакса
     const section = document.querySelector('.parallax-section');
     if (!section) {
         console.warn('Parallax section not found');
         return;
     }
 
-    // Layers (wrappers)
+    // Слои (обертки)
     const layers = section.querySelectorAll('.parallax-layer');
-    // Individual elements with speed
+    // Отдельные элементы со скоростью
     const elements = section.querySelectorAll('[data-parallax-speed]');
 
     function onScroll() {
@@ -39,39 +39,39 @@
     function update() {
         ticking = false;
 
-        // Get section bounds to create local parallax relative to section
+        // Получить границы секции для создания локального параллакса относительно секции
         const rect = section.getBoundingClientRect();
         const sectionTop = rect.top + window.pageYOffset;
-        const relativeY = lastScrollY - sectionTop; // scroll offset relative to section
+        const relativeY = lastScrollY - sectionTop; // смещение прокрутки относительно секции
 
-        // Update layer offsets (slower for background, faster for foreground)
+        // Обновить смещения слоев (медленнее для фона, быстрее для переднего плана)
         layers.forEach(layer => {
             const speedAttr = layer.getAttribute('data-parallax-speed');
             const speed = speedAttr ? parseFloat(speedAttr) : 0.5;
-            const translateY = -relativeY * speed * 0.2; // soften motion factor
+            const translateY = -relativeY * speed * 0.2; // коэффициент смягчения движения
             layer.style.transform = `translate3d(0, ${translateY}px, 0)`;
         });
 
-        // Update individual elements (including reverse motion with negative speed)
+        // Обновить отдельные элементы (включая обратное движение с отрицательной скоростью)
         elements.forEach(el => {
             const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0.5;
-            // Only process elements inside the parallax section
+            // Обрабатывать только элементы внутри секции параллакса
             if (!section.contains(el)) return;
 
-            // Compute element motion
-            const moveY = -relativeY * speed * 0.3; // element motion factor
+            // Вычислить движение элемента
+            const moveY = -relativeY * speed * 0.3; // коэффициент движения элемента
             el.style.transform = `translate3d(0, ${moveY}px, 0)`;
         });
     }
 
-    // Visibility handling to avoid doing work in background tabs
+    // Обработка видимости, чтобы избежать работы во вкладках в фоне
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
             requestTick();
         }
     });
 
-    // Resize handling (recalculate positions)
+    // Обработка изменения размера (пересчет позиций)
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -80,9 +80,9 @@
         }, 150);
     });
 
-    // Initial kick
+    // Начальный запуск
     window.addEventListener('scroll', onScroll, { passive: true });
     requestTick();
 
-    console.log('Parallax initialized');
+    console.log('Параллакс инициализирован');
 })();

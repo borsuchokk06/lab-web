@@ -1,4 +1,4 @@
-// Preloader functionality
+// Функциональность прелоадера
 (function() {
     'use strict';
 

@@ -1,8 +1,8 @@
-// Yandex Maps Integration
+// Интеграция с Яндекс.Картами
 (function() {
     'use strict';
 
-    // Store locations data
+    // Данные о местоположениях магазинов
     const stores = [
         {
             id: 'main',
@@ -38,7 +38,7 @@
     let currentRoute = null;
 
     /**
-     * Initialize main map
+     * Инициализация основной карты
      */
     function initMainMap() {
         if (!window.ymaps) {
@@ -47,14 +47,14 @@
         }
 
         ymaps.ready(function() {
-            // Create map centered on Moscow
+            // Создание карты с центром в Москве
             mainMap = new ymaps.Map('yandex-map', {
                 center: [55.751574, 37.573856],
                 zoom: 5,
                 controls: ['zoomControl', 'typeSelector']
             });
 
-            // Add markers for all stores
+            // Добавление маркеров для всех магазинов
             stores.forEach(store => {
                 addMarker(mainMap, store);
             });
@@ -64,7 +64,7 @@
     }
 
     /**
-     * Initialize modal map
+     * Инициализация модальной карты
      */
     function initModalMap() {
         if (!window.ymaps || modalMap) return;
@@ -76,7 +76,7 @@
                 controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'geolocationControl']
             });
 
-            // Add markers for all stores
+            // Добавление маркеров для всех магазинов
             stores.forEach(store => {
                 addMarker(modalMap, store);
             });
@@ -86,7 +86,7 @@
     }
 
     /**
-     * Add marker to map
+     * Добавление маркера на карту
      */
     function addMarker(map, store) {
         const placemark = new ymaps.Placemark(
@@ -115,7 +115,7 @@
     }
 
     /**
-     * Build route to store
+     * Построение маршрута к магазину
      */
     function buildRoute(storeId, useModalMap = false) {
         const store = stores.find(s => s.id === storeId);
@@ -130,19 +130,19 @@
             return;
         }
 
-        // Get user's location
+        // Получение местоположения пользователя
         ymaps.geolocation.get({
             provider: 'browser',
             mapStateAutoApply: true
         }).then(function(result) {
             const userCoords = result.geoObjects.position;
             
-            // Clear previous route
+            // Очистка предыдущего маршрута
             if (currentRoute) {
                 targetMap.geoObjects.remove(currentRoute);
             }
 
-            // Create multiRoute
+            // Создание мультимаршрута
             const multiRoute = new ymaps.multiRouter.MultiRoute({
                 referencePoints: [
                     userCoords,
@@ -162,16 +162,16 @@
             targetMap.geoObjects.add(multiRoute);
             currentRoute = multiRoute;
 
-            // Show notification
+            // Показать уведомление
             if (typeof toastSuccess === 'function') {
                 toastSuccess(
-                    'Route Built!',
-                    `Directions to ${store.name}`,
+                    'Маршрут построен!',
+                    `Направления к ${store.name}`,
                     { duration: 3000 }
                 );
             }
 
-            // Open modal if building from main map
+            // Открыть модальное окно, если маршрут строится с основной карты
             if (!useModalMap) {
                 openMapModal();
                 setTimeout(() => {
@@ -182,23 +182,23 @@
             }
 
         }).catch(function(error) {
-            console.error('Geolocation error:', error);
+            console.error('Ошибка геолокации:', error);
             
-            // Show error notification
+            // Показать уведомление об ошибке
             if (typeof toastError === 'function') {
                 toastError(
-                    'Location Error',
-                    'Please enable location services to build a route',
+                    'Ошибка местоположения',
+                    'Пожалуйста, включите службы геолокации для построения маршрута',
                     { duration: 5000 }
                 );
             } else {
-                alert('Please enable location services to build a route');
+                alert('Пожалуйста, включите службы геолокации для построения маршрута');
             }
         });
     }
 
     /**
-     * Open map modal
+     * Открытие модального окна карты
      */
     function openMapModal() {
         const modal = document.getElementById('map-modal');
@@ -207,14 +207,14 @@
         modal.classList.add('active');
         document.body.classList.add('map-modal-open');
 
-        // Initialize modal map if not already done
+        // Инициализация модальной карты, если еще не сделано
         if (!modalMap) {
             initModalMap();
         }
     }
 
     /**
-     * Close map modal
+     * Закрытие модального окна карты
      */
     function closeMapModal() {
         const modal = document.getElementById('map-modal');
@@ -224,31 +224,31 @@
         document.body.classList.remove('map-modal-open');
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
-    // Initialize main map when document is ready
+    // Инициализация основной карты при готовности документа
     document.addEventListener('DOMContentLoaded', function() {
         initMainMap();
 
-        // Open modal button
+        // Кнопка открытия модального окна
         const openModalBtn = document.getElementById('open-map-modal');
         if (openModalBtn) {
             openModalBtn.addEventListener('click', openMapModal);
         }
 
-        // Close modal button
+        // Кнопка закрытия модального окна
         const closeModalBtn = document.getElementById('map-modal-close');
         if (closeModalBtn) {
             closeModalBtn.addEventListener('click', closeMapModal);
         }
 
-        // Close modal by clicking overlay
+        // Закрытие модального окна по клику на оверлей
         const modalOverlay = document.getElementById('map-modal-overlay');
         if (modalOverlay) {
             modalOverlay.addEventListener('click', closeMapModal);
         }
 
-        // Close modal with Escape key
+        // Закрытие модального окна клавишей Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const modal = document.getElementById('map-modal');
@@ -258,28 +258,28 @@
             }
         });
 
-        // Store card click - show on map
+        // Клик по карточке магазина - показать на карте
         const storeCards = document.querySelectorAll('.store-card');
         storeCards.forEach(card => {
             card.addEventListener('click', function(e) {
                 if (e.target.classList.contains('route-btn')) {
-                    return; // Let route button handle its own click
+                    return; // Позволить кнопке маршрута обработать свой клик
                 }
 
                 const coords = JSON.parse(this.dataset.coords);
                 if (mainMap) {
                     mainMap.setCenter(coords, 12, { duration: 500 });
                     
-                    // Show notification
+                    // Показать уведомление
                     const storeName = this.querySelector('h3').textContent;
                     if (typeof toastInfo === 'function') {
-                        toastInfo('Location Selected', storeName.replace('🏪 ', ''));
+                        toastInfo('Местоположение выбрано', storeName.replace('🏪 ', ''));
                     }
                 }
             });
         });
 
-        // Route buttons
+        // Кнопки построения маршрута
         const routeBtns = document.querySelectorAll('.route-btn');
         routeBtns.forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -289,7 +289,7 @@
             });
         });
 
-        // Map control buttons (modal)
+        // Кнопки управления картой (модальное окно)
         const zoomInBtn = document.getElementById('zoom-in');
         const zoomOutBtn = document.getElementById('zoom-out');
         const resetMapBtn = document.getElementById('reset-map');
@@ -317,7 +317,7 @@
                 if (modalMap) {
                     modalMap.setCenter([55.751574, 37.573856], 5, { duration: 500 });
                     
-                    // Clear route
+                    // Очистить маршрут
                     if (currentRoute) {
                         modalMap.geoObjects.remove(currentRoute);
                         currentRoute = null;
@@ -327,13 +327,13 @@
         }
     });
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
     window.buildRouteToStore = buildRoute;
     window.openMapModal = openMapModal;
     window.closeMapModal = closeMapModal;
 
-    console.log('Map functionality initialized!');
+    console.log('Функциональность карты инициализирована!');
 
 })();
 

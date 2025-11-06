@@ -1,8 +1,8 @@
-// Video Player Functionality
+// Функциональность видеоплеера
 (function() {
     'use strict';
 
-    // DOM Elements
+    // Элементы DOM
     const videoModal = document.getElementById('video-modal');
     const videoModalOverlay = document.getElementById('video-modal-overlay');
     const videoModalClose = document.getElementById('video-modal-close');
@@ -21,7 +21,7 @@
     }
 
     /**
-     * Format time (seconds to MM:SS)
+     * Форматировать время (секунды в MM:SS)
      */
     function formatTime(seconds) {
         if (isNaN(seconds)) return '0:00';
@@ -32,39 +32,39 @@
     }
 
     /**
-     * Open video modal
+     * Открыть модальное окно видео
      */
     function openVideoModal() {
-        console.log('Opening video modal...');
+        console.log('Открытие модального окна видео...');
         
         videoModal.classList.add('active');
         document.body.classList.add('video-modal-open');
         
-        // Auto-play video
+        // Автоматическое воспроизведение видео
         setTimeout(() => {
             if (videoElement) {
                 videoElement.play().then(() => {
-                    console.log('Video started playing');
+                    console.log('Видео начало воспроизведение');
                     updatePlayPauseButton(true);
                 }).catch(err => {
-                    console.error('Video play error:', err);
+                    console.error('Ошибка воспроизведения видео:', err);
                 });
             }
         }, 400);
 
-        // Show notification
+        // Показать уведомление
         if (typeof toastInfo === 'function') {
-            toastInfo('Video Player', 'Enjoy our product showcase!');
+            toastInfo('Видеоплеер', 'Наслаждайтесь нашей презентацией товаров!');
         }
     }
 
     /**
-     * Close video modal
+     * Закрыть модальное окно видео
      */
     function closeVideoModal() {
-        console.log('Closing video modal...');
+        console.log('Закрытие модального окна видео...');
         
-        // Pause and reset video
+        // Приостановить и сбросить видео
         if (videoElement) {
             videoElement.pause();
             videoElement.currentTime = 0;
@@ -77,7 +77,7 @@
     }
 
     /**
-     * Toggle play/pause
+     * Переключить воспроизведение/паузу
      */
     function togglePlayPause() {
         if (!videoElement) return;
@@ -92,7 +92,7 @@
     }
 
     /**
-     * Update play/pause button state
+     * Обновить состояние кнопки воспроизведения/паузы
      */
     function updatePlayPauseButton(isPlaying) {
         if (!videoPlayPauseBtn) return;
@@ -105,7 +105,7 @@
     }
 
     /**
-     * Toggle mute
+     * Переключить беззвучный режим
      */
     function toggleMute() {
         if (!videoElement) return;
@@ -128,7 +128,7 @@
     }
 
     /**
-     * Update volume
+     * Обновить громкость
      */
     function updateVolume(value) {
         if (!videoElement) return;
@@ -150,7 +150,7 @@
     }
 
     /**
-     * Update progress bar
+     * Обновить индикатор прогресса
      */
     function updateProgress() {
         if (!videoElement || !videoProgressBar) return;
@@ -158,7 +158,7 @@
         const progress = (videoElement.currentTime / videoElement.duration) * 100;
         videoProgressBar.value = progress || 0;
 
-        // Update time displays
+        // Обновить отображение времени
         if (currentTimeDisplay) {
             currentTimeDisplay.textContent = formatTime(videoElement.currentTime);
         }
@@ -168,7 +168,7 @@
     }
 
     /**
-     * Seek video
+     * Переместиться по видео
      */
     function seekVideo(value) {
         if (!videoElement) return;
@@ -178,7 +178,7 @@
     }
 
     /**
-     * Toggle fullscreen
+     * Переключить полноэкранный режим
      */
     function toggleFullscreen() {
         const videoContainer = document.querySelector('.video-modal-content');
@@ -198,11 +198,11 @@
         }
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Video thumbnail click in gallery
+        // Клик по миниатюре видео в галерее
         const videoThumb = document.querySelector('.gallery-thumb.video-thumb');
         if (videoThumb) {
             videoThumb.addEventListener('click', function(e) {
@@ -211,24 +211,24 @@
             });
         }
 
-        // Close modal button
+        // Кнопка закрытия модального окна
         if (videoModalClose) {
             videoModalClose.addEventListener('click', closeVideoModal);
         }
 
-        // Close modal by clicking overlay
+        // Закрытие модального окна по клику на оверлей
         if (videoModalOverlay) {
             videoModalOverlay.addEventListener('click', closeVideoModal);
         }
 
-        // Close modal with Escape key
+        // Закрытие модального окна клавишей Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && videoModal.classList.contains('active')) {
                 closeVideoModal();
             }
         });
 
-        // Video controls
+        // Элементы управления видео
         if (videoPlayPauseBtn) {
             videoPlayPauseBtn.addEventListener('click', togglePlayPause);
         }
@@ -242,7 +242,7 @@
                 updateVolume(parseInt(this.value));
             });
             
-            // Initialize volume
+            // Инициализировать громкость
             updateVolume(parseInt(videoVolumeSlider.value));
         }
 
@@ -256,55 +256,55 @@
             videoFullscreenBtn.addEventListener('click', toggleFullscreen);
         }
 
-        // Video events
+        // События видео
         if (videoElement) {
-            // Update progress
+            // Обновить прогресс
             videoElement.addEventListener('timeupdate', updateProgress);
 
-            // Video ended
+            // Видео закончилось
             videoElement.addEventListener('ended', function() {
                 updatePlayPauseButton(false);
                 
                 if (typeof toastSuccess === 'function') {
-                    toastSuccess('Video Ended', 'Thanks for watching!');
+                    toastSuccess('Видео закончилось', 'Спасибо за просмотр!');
                 }
             });
 
-            // Video play
+            // Воспроизведение видео
             videoElement.addEventListener('play', function() {
                 updatePlayPauseButton(true);
             });
 
-            // Video pause
+            // Пауза видео
             videoElement.addEventListener('pause', function() {
                 updatePlayPauseButton(false);
             });
 
-            // Metadata loaded
+            // Метаданные загружены
             videoElement.addEventListener('loadedmetadata', function() {
                 if (totalTimeDisplay) {
                     totalTimeDisplay.textContent = formatTime(videoElement.duration);
                 }
             });
 
-            // Video loading
+            // Загрузка видео
             videoElement.addEventListener('waiting', function() {
                 if (typeof toastInfo === 'function') {
-                    toastInfo('Buffering', 'Loading video...', { duration: 2000 });
+                    toastInfo('Буферизация', 'Загрузка видео...', { duration: 2000 });
                 }
             });
 
-            // Video can play
+            // Видео готово к воспроизведению
             videoElement.addEventListener('canplay', function() {
-                console.log('Video ready to play');
+                console.log('Видео готово к воспроизведению');
             });
 
-            // Click on video to toggle play/pause
+            // Клик по видео для переключения воспроизведения/паузы
             videoElement.addEventListener('click', function() {
                 togglePlayPause();
             });
 
-            // Keyboard controls for video
+            // Управление с клавиатуры для видео
             document.addEventListener('keydown', function(e) {
                 if (!videoModal.classList.contains('active')) return;
 
@@ -351,16 +351,16 @@
             });
         }
 
-        console.log('Video player initialized!');
+        console.log('Видеоплеер инициализирован!');
     });
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
     window.openVideoModal = openVideoModal;
     window.closeVideoModal = closeVideoModal;
     window.toggleVideoPlayPause = togglePlayPause;
 
-    console.log('Video player functionality ready!');
+    console.log('Функциональность видеоплеера готова!');
 
 })();
 

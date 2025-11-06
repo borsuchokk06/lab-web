@@ -1,4 +1,4 @@
-// Toast Notifications System
+// Система уведомлений
 (function() {
     'use strict';
 
@@ -9,7 +9,7 @@
         return;
     }
 
-    // Toast icons for different types
+    // Иконки уведомлений для разных типов
     const toastIcons = {
         success: '✓',
         error: '✕',
@@ -19,14 +19,14 @@
     };
 
     /**
-     * Create and show a toast notification
-     * @param {Object} options - Toast configuration
-     * @param {string} options.type - Type of toast (success, error, warning, info, cart)
-     * @param {string} options.title - Toast title
-     * @param {string} options.message - Toast message
-     * @param {number} options.duration - Duration in milliseconds (default: 4000)
-     * @param {boolean} options.showProgress - Show progress bar (default: true)
-     * @param {string} options.image - Optional product image URL
+     * Создать и показать уведомление
+     * @param {Object} options - Конфигурация уведомления
+     * @param {string} options.type - Тип уведомления (success, error, warning, info, cart)
+     * @param {string} options.title - Заголовок уведомления
+     * @param {string} options.message - Сообщение уведомления
+     * @param {number} options.duration - Длительность в миллисекундах (по умолчанию: 4000)
+     * @param {boolean} options.showProgress - Показать индикатор прогресса (по умолчанию: true)
+     * @param {string} options.image - Необязательный URL изображения товара
      */
     function showToast(options) {
         const {
@@ -38,11 +38,11 @@
             image = null
         } = options;
 
-        // Create toast element
+        // Создать элемент уведомления
         const toast = document.createElement('div');
         toast.className = `toast ${type}${image ? ' toast-with-image' : ''}`;
 
-        // Set progress bar animation
+        // Установить анимацию индикатора прогресса
         if (showProgress) {
             toast.style.setProperty('--duration', `${duration}ms`);
             toast.style.animation = `slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards`;
@@ -59,22 +59,22 @@
             `;
         }
 
-        // Build toast HTML
+        // Построить HTML уведомления
         let toastHTML = '';
 
-        // Add product image if provided
+        // Добавить изображение товара, если предоставлено
         if (image) {
-            toastHTML += `<img src="${image}" alt="Product" class="toast-product-image">`;
+            toastHTML += `<img src="${image}" alt="Товар" class="toast-product-image">`;
         }
 
-        // Add icon
+        // Добавить иконку
         toastHTML += `
             <div class="toast-icon">
                 ${toastIcons[type] || toastIcons.info}
             </div>
         `;
 
-        // Add content
+        // Добавить содержимое
         toastHTML += `
             <div class="toast-content">
                 <h4 class="toast-title">${title}</h4>
@@ -82,26 +82,26 @@
             </div>
         `;
 
-        // Add close button
+        // Добавить кнопку закрытия
         toastHTML += `
-            <button class="toast-close" aria-label="Close notification">✕</button>
+            <button class="toast-close" aria-label="Закрыть уведомление">✕</button>
         `;
 
         toast.innerHTML = toastHTML;
 
-        // Add to container
+        // Добавить в контейнер
         toastContainer.appendChild(toast);
 
-        // Close button handler
+        // Обработчик кнопки закрытия
         const closeBtn = toast.querySelector('.toast-close');
         closeBtn.addEventListener('click', () => removeToast(toast));
 
-        // Auto remove after duration
+        // Автоматическое удаление после длительности
         const timeoutId = setTimeout(() => {
             removeToast(toast);
         }, duration);
 
-        // Pause on hover
+        // Пауза при наведении
         toast.addEventListener('mouseenter', () => {
             clearTimeout(timeoutId);
             toast.style.animationPlayState = 'paused';
@@ -112,12 +112,12 @@
             toast.style.animationPlayState = 'running';
         });
 
-        // Log to console
-        console.log(`Toast shown: [${type.toUpperCase()}] ${title}`);
+        // Записать в консоль
+        console.log(`Уведомление показано: [${type.toUpperCase()}] ${title}`);
     }
 
     /**
-     * Remove toast with animation
+     * Удалить уведомление с анимацией
      */
     function removeToast(toast) {
         if (!toast || !toast.parentElement) return;
@@ -132,17 +132,17 @@
     }
 
     /**
-     * Clear all toasts
+     * Очистить все уведомления
      */
     function clearAllToasts() {
         const toasts = toastContainer.querySelectorAll('.toast');
         toasts.forEach(toast => removeToast(toast));
     }
 
-    // ==================== PREDEFINED TOAST FUNCTIONS ====================
+    // ==================== ПРЕДОПРЕДЕЛЕННЫЕ ФУНКЦИИ УВЕДОМЛЕНИЙ ====================
 
     /**
-     * Show success toast
+     * Показать уведомление об успехе
      */
     function showSuccess(title, message, options = {}) {
         showToast({
@@ -154,20 +154,20 @@
     }
 
     /**
-     * Show error toast
+     * Показать уведомление об ошибке
      */
     function showError(title, message, options = {}) {
         showToast({
             type: 'error',
             title: title,
             message: message,
-            duration: 5000, // Errors stay longer
+            duration: 5000, // Ошибки остаются дольше
             ...options
         });
     }
 
     /**
-     * Show warning toast
+     * Показать предупреждающее уведомление
      */
     function showWarning(title, message, options = {}) {
         showToast({
@@ -179,7 +179,7 @@
     }
 
     /**
-     * Show info toast
+     * Показать информационное уведомление
      */
     function showInfo(title, message, options = {}) {
         showToast({
@@ -191,7 +191,7 @@
     }
 
     /**
-     * Show cart toast
+     * Показать уведомление корзины
      */
     function showCartNotification(title, message, productImage, options = {}) {
         showToast({
@@ -203,10 +203,10 @@
         });
     }
 
-    // ==================== COMMON NOTIFICATIONS ====================
+    // ==================== ОБЩИЕ УВЕДОМЛЕНИЯ ====================
 
     /**
-     * Product added to cart
+     * Товар добавлен в корзину
      */
     function notifyProductAdded(productName, quantity = 1, productImage = null) {
         showCartNotification(
@@ -218,7 +218,7 @@
     }
 
     /**
-     * Product removed from cart
+     * Товар удален из корзины
      */
     function notifyProductRemoved(productName) {
         showWarning(
@@ -229,7 +229,7 @@
     }
 
     /**
-     * Purchase completed
+     * Покупка завершена
      */
     function notifyPurchaseCompleted(orderNumber) {
         showSuccess(
@@ -240,7 +240,7 @@
     }
 
     /**
-     * Out of stock
+     * Нет в наличии
      */
     function notifyOutOfStock(productName) {
         showError(
@@ -251,7 +251,7 @@
     }
 
     /**
-     * Low stock warning
+     * Предупреждение о низком запасе
      */
     function notifyLowStock(productName, quantity) {
         showWarning(
@@ -262,7 +262,7 @@
     }
 
     /**
-     * Wishlist added
+     * Добавлено в список желаний
      */
     function notifyAddedToWishlist(productName) {
         showSuccess(
@@ -273,7 +273,7 @@
     }
 
     /**
-     * Saved preferences
+     * Сохранены настройки
      */
     function notifySaved(message = 'Changes saved successfully') {
         showSuccess(
@@ -284,7 +284,7 @@
     }
 
     /**
-     * Error occurred
+     * Произошла ошибка
      */
     function notifyError(message = 'Something went wrong. Please try again.') {
         showError(
@@ -295,7 +295,7 @@
     }
 
     /**
-     * Copied to clipboard
+     * Скопировано в буфер обмена
      */
     function notifyCopied(what = 'Link') {
         showInfo(
@@ -306,7 +306,7 @@
     }
 
     /**
-     * Login success
+     * Успешный вход
      */
     function notifyLoginSuccess(username) {
         showSuccess(
@@ -317,7 +317,7 @@
     }
 
     /**
-     * Logout
+     * Выход
      */
     function notifyLogout() {
         showInfo(
@@ -327,19 +327,19 @@
         );
     }
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
-    // Main toast function
+    // Основная функция уведомлений
     window.showToast = showToast;
     window.clearAllToasts = clearAllToasts;
     
-    // Type-specific functions
+    // Функции для конкретных типов
     window.toastSuccess = showSuccess;
     window.toastError = showError;
     window.toastWarning = showWarning;
     window.toastInfo = showInfo;
     
-    // Common notifications
+    // Общие уведомления
     window.notifyProductAdded = notifyProductAdded;
     window.notifyProductRemoved = notifyProductRemoved;
     window.notifyPurchaseCompleted = notifyPurchaseCompleted;
@@ -352,7 +352,7 @@
     window.notifyLoginSuccess = notifyLoginSuccess;
     window.notifyLogout = notifyLogout;
 
-    console.log('Toast notification system initialized!');
+    console.log('Система уведомлений инициализирована!');
 
 })();
 

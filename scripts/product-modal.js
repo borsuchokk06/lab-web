@@ -1,8 +1,8 @@
-// Product Modal Functionality
+// Функциональность модального окна товара
 (function() {
     'use strict';
 
-    // DOM Elements
+    // Элементы DOM
     const modal = document.getElementById('product-modal');
     const modalOverlay = document.getElementById('modal-overlay');
     const modalClose = document.getElementById('modal-close');
@@ -20,17 +20,17 @@
     const addToCartBtn = document.getElementById('modal-add-to-cart');
     const galleryThumbs = document.querySelectorAll('.modal-gallery-thumb');
 
-    // Check if modal exists
+    // Проверить, существует ли модальное окно
     if (!modal) {
         console.warn('Product modal not found');
         return;
     }
 
-    // Current product data
+    // Данные текущего товара
     let currentProduct = null;
 
     /**
-     * Open modal with product data
+     * Открыть модальное окно с данными товара
      */
     function openModal(productData) {
         console.log('Opening modal with product:', productData);
@@ -42,7 +42,7 @@
 
         currentProduct = productData;
 
-        // Fill modal with product data
+        // Заполнить модальное окно данными товара
         modalImage.src = productData.image || '';
         modalImage.alt = productData.name || '';
         modalTitle.textContent = productData.name || '';
@@ -51,7 +51,7 @@
         modalPrice.textContent = `$${productData.price || 0}`;
         modalReviews.textContent = `${productData.reviews || 0} Reviews`;
 
-        // Set badge
+        // Установить бейдж
         if (productData.badge) {
             modalBadge.textContent = productData.badge;
             modalBadge.className = 'modal-badge ' + productData.badge.toLowerCase();
@@ -59,7 +59,7 @@
             modalBadge.className = 'modal-badge';
         }
 
-        // Set stock status
+        // Установить статус наличия
         if (productData.stock) {
             modalStock.textContent = productData.stock;
             if (productData.stock === "In Stock") {
@@ -71,34 +71,34 @@
             }
         }
 
-        // Set gallery images (same image for demo, can be different images)
+        // Установить изображения галереи (то же изображение для демо, могут быть разные изображения)
         galleryThumbs.forEach((thumb, index) => {
             thumb.src = productData.image || '';
             thumb.alt = `${productData.name} view ${index + 1}`;
         });
 
-        // Reset quantity
+        // Сбросить количество
         qtyInput.value = 1;
 
-        // Show modal
+        // Показать модальное окно
         modal.classList.add('active');
         document.body.classList.add('modal-open');
 
-        // Save current scroll position
+        // Сохранить текущую позицию прокрутки
         const scrollY = window.scrollY;
         document.body.style.top = `-${scrollY}px`;
     }
 
     /**
-     * Close modal
+     * Закрыть модальное окно
      */
     function closeModal() {
-        console.log('Closing modal');
+        console.log('Закрытие модального окна');
         
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
 
-        // Restore scroll position
+        // Восстановить позицию прокрутки
         const scrollY = document.body.style.top;
         document.body.style.top = '';
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
@@ -106,38 +106,38 @@
         currentProduct = null;
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
-    // Close modal by clicking close button
+    // Закрыть модальное окно по клику на кнопку закрытия
     if (modalClose) {
         modalClose.addEventListener('click', closeModal);
     }
 
-    // Close modal by clicking overlay
+    // Закрыть модальное окно по клику на оверлей
     if (modalOverlay) {
         modalOverlay.addEventListener('click', closeModal);
     }
 
-    // Close modal by pressing Escape
+    // Закрыть модальное окно нажатием Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
         }
     });
 
-    // Gallery thumbnail click
+    // Клик по миниатюре галереи
     galleryThumbs.forEach(thumb => {
         thumb.addEventListener('click', function() {
-            // Remove active class from all thumbnails
+            // Удалить активный класс со всех миниатюр
             galleryThumbs.forEach(t => t.classList.remove('active'));
-            // Add active class to clicked thumbnail
+            // Добавить активный класс к нажатой миниатюре
             this.classList.add('active');
-            // Update main image
+            // Обновить основное изображение
             modalImage.src = this.src;
         });
     });
 
-    // Quantity controls
+    // Элементы управления количеством
     if (qtyMinus) {
         qtyMinus.addEventListener('click', function() {
             const currentValue = parseInt(qtyInput.value) || 1;
@@ -157,7 +157,7 @@
         });
     }
 
-    // Validate quantity input
+    // Валидация ввода количества
     if (qtyInput) {
         qtyInput.addEventListener('change', function() {
             const value = parseInt(this.value) || 1;
@@ -172,22 +172,22 @@
         });
     }
 
-    // Add to cart button
+    // Кнопка добавления в корзину
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', function() {
             const quantity = parseInt(qtyInput.value) || 1;
             
             if (currentProduct) {
-                console.log('Adding to cart:', {
+                console.log('Добавление в корзину:', {
                     product: currentProduct,
                     quantity: quantity
                 });
                 
-                // Show toast notification instead of alert
+                // Показать уведомление вместо alert
                 if (typeof notifyProductAdded === 'function') {
                     notifyProductAdded(currentProduct.name, quantity, currentProduct.image);
                 } else {
-                    alert(`Added ${quantity} x ${currentProduct.name} to cart!`);
+                    alert(`Добавлено ${quantity} x ${currentProduct.name} в корзину!`);
                 }
                 
                 closeModal();
@@ -195,17 +195,17 @@
         });
     }
 
-    // ==================== ATTACH TO PRODUCT CARDS ====================
+    // ==================== ПРИВЯЗКА К КАРТОЧКАМ ТОВАРОВ ====================
 
     /**
-     * Attach modal to product cards
+     * Привязать модальное окно к карточкам товаров
      */
     function attachModalToCards() {
-        // For catalog page - dynamically generated cards
+        // Для страницы каталога - динамически сгенерированные карточки
         document.addEventListener('click', function(e) {
             const card = e.target.closest('.product-catalog-card');
             if (card && !e.target.closest('.product-catalog-card-button')) {
-                // Extract product data from card
+                // Извлечь данные товара из карточки
                 const productData = {
                     name: card.querySelector('.product-catalog-card-title')?.textContent || '',
                     category: card.querySelector('.product-catalog-card-category')?.textContent || '',
@@ -221,7 +221,7 @@
             }
         });
 
-        // For home page - slider cards
+        // Для главной страницы - карточки слайдера
         document.addEventListener('click', function(e) {
             const slideCard = e.target.closest('.product-slide-card');
             if (slideCard && !e.target.closest('.product-slide-btn')) {
@@ -240,7 +240,7 @@
             }
         });
 
-        // For home page - section cards
+        // Для главной страницы - карточки секций
         const section3Cards = document.querySelectorAll('.section3-slider-card');
         const section4Cards = document.querySelectorAll('.section4-slider-card');
         
@@ -268,21 +268,21 @@
         });
     }
 
-    // Initialize when DOM is ready
+    // Инициализировать при готовности DOM
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', attachModalToCards);
     } else {
         attachModalToCards();
     }
 
-    // Re-attach after dynamic content loads (for catalog page)
+    // Повторно привязать после загрузки динамического контента (для страницы каталога)
     setTimeout(attachModalToCards, 1000);
 
-    // Export function for external use
+    // Экспорт функции для внешнего использования
     window.openProductModal = openModal;
     window.closeProductModal = closeModal;
 
-    console.log('Product modal initialized successfully!');
+    console.log('Модальное окно товара успешно инициализировано!');
 
 })();
 

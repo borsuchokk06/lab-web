@@ -1,4 +1,4 @@
-// Burger Menu Functionality
+// Функциональность бургер-меню
 (function() {
     'use strict';
 
@@ -68,7 +68,7 @@
         }
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
     // 1. Клик по кнопке бургера
     burgerBtn.addEventListener('click', function(e) {
@@ -96,13 +96,13 @@
         link.addEventListener('click', function(e) {
             console.log('Menu link clicked, closing menu...');
             
-            // If it's an anchor link (smooth scroll), close menu after delay
+            // Если это якорная ссылка (плавная прокрутка), закрываем меню с задержкой
             const href = this.getAttribute('href');
             if (href && href.startsWith('#')) {
                 // Небольшая задержка для плавности
                 setTimeout(closeMenu, 300);
             } else {
-                // External link - close immediately
+                // Внешняя ссылка - закрываем сразу
                 setTimeout(closeMenu, 100);
             }
         });
@@ -164,7 +164,7 @@
         }
     }
 
-    // ==================== ACCESSIBILITY ====================
+    // ==================== ДОСТУПНОСТЬ ====================
 
     // Управление фокусом в меню
     mobileMenu.addEventListener('keydown', function(e) {
@@ -174,7 +174,7 @@
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
 
-        // Tab navigation
+        // Навигация с помощью Tab
         if (e.key === 'Tab') {
             if (e.shiftKey) {
                 // Shift + Tab
@@ -210,7 +210,7 @@
 
     // ==================== ИНИЦИАЛИЗАЦИЯ ====================
     
-    console.log('Burger menu initialized successfully!');
+    console.log('Бургер-меню успешно инициализировано!');
     
     // Проверяем, открыто ли меню при загрузке (не должно быть)
     if (mobileMenu.classList.contains('active')) {

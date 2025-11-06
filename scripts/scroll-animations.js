@@ -1,45 +1,45 @@
-// Scroll Animations with Intersection Observer
+// Анимации прокрутки с Intersection Observer
 (function() {
     'use strict';
 
-    // Configuration
+    // Конфигурация
     const animationConfig = {
-        threshold: 0.15,        // 15% of element visible triggers animation
+        threshold: 0.15,        // 15% видимости элемента запускает анимацию
         rootMargin: '0px 0px -50px 0px'
     };
 
     let countersAnimated = false;
 
-    // ==================== INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ====================
+    // ==================== INTERSECTION OBSERVER ДЛЯ АНИМАЦИЙ ПРОКРУТКИ ====================
 
     /**
-     * Initialize Intersection Observer for scroll animations
+     * Инициализировать Intersection Observer для анимаций прокрутки
      */
     function initScrollAnimations() {
-        // Check if Intersection Observer is supported
+        // Проверить, поддерживается ли Intersection Observer
         if (!('IntersectionObserver' in window)) {
-            console.warn('IntersectionObserver not supported, animations disabled');
-            // Fallback: show all elements immediately
+            console.warn('IntersectionObserver не поддерживается, анимации отключены');
+            // Резервный вариант: показать все элементы сразу
             document.querySelectorAll('.scroll-animate').forEach(el => {
                 el.classList.add('animated');
             });
             return;
         }
 
-        // Create observer
+        // Создать наблюдатель
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Element is visible
+                    // Элемент виден
                     entry.target.classList.add('animated');
                     
-                    // Optional: unobserve after animation (one-time animation)
+                    // Опционально: прекратить наблюдение после анимации (одноразовая анимация)
                     // observer.unobserve(entry.target);
                 }
             });
         }, animationConfig);
 
-        // Observe all elements with scroll-animate class
+        // Наблюдать за всеми элементами с классом scroll-animate
         const animatedElements = document.querySelectorAll('.scroll-animate');
         animatedElements.forEach(element => {
             observer.observe(element);
@@ -48,10 +48,10 @@
         console.log(`Observing ${animatedElements.length} elements for scroll animations`);
     }
 
-    // ==================== ANIMATED COUNTERS ====================
+    // ==================== АНИМИРОВАННЫЕ СЧЕТЧИКИ ====================
 
     /**
-     * Animate counter from 0 to target value
+     * Анимировать счетчик от 0 до целевого значения
      */
     function animateCounter(element, target, duration = 2000) {
         const start = 0;
@@ -71,14 +71,14 @@
     }
 
     /**
-     * Format number with commas
+     * Форматировать число с запятыми
      */
     function formatNumber(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     /**
-     * Initialize counters
+     * Инициализировать счетчики
      */
     function initCounters() {
         const counterObserver = new IntersectionObserver((entries) => {
@@ -86,17 +86,17 @@
                 if (entry.isIntersecting && !countersAnimated) {
                     countersAnimated = true;
                     
-                    // Animate all stat numbers
+                    // Анимировать все числа статистики
                     const statNumbers = document.querySelectorAll('.stat-number');
                     statNumbers.forEach(stat => {
                         const target = parseInt(stat.dataset.count) || 0;
                         animateCounter(stat, target, 2000);
                     });
 
-                    // Show notification
+                    // Показать уведомление
                     if (typeof toastSuccess === 'function') {
                         setTimeout(() => {
-                            toastSuccess('Amazing Stats!', 'We are proud of our achievements', { duration: 3000 });
+                            toastSuccess('Потрясающая статистика!', 'Мы гордимся нашими достижениями', { duration: 3000 });
                         }, 1000);
                     }
                 }
@@ -109,10 +109,10 @@
         }
     }
 
-    // ==================== HEADER BACKGROUND ON SCROLL ====================
+    // ==================== ФОН ЗАГОЛОВКА ПРИ ПРОКРУТКЕ ====================
 
     /**
-     * Change header background on scroll
+     * Изменить фон заголовка при прокрутке
      */
     function handleHeaderScroll() {
         const header = document.querySelector('header');
@@ -125,10 +125,10 @@
         }
     }
 
-    // ==================== PARALLAX EFFECT ====================
+    // ==================== ЭФФЕКТ ПАРАЛЛАКСА ====================
 
     /**
-     * Apply parallax effect to elements
+     * Применить эффект параллакса к элементам
      */
     function handleParallax() {
         const parallaxElements = document.querySelectorAll('[data-parallax]');
@@ -137,7 +137,7 @@
             const speed = parseFloat(element.dataset.parallax) || 0.5;
             const rect = element.getBoundingClientRect();
             
-            // Only apply parallax if element is in viewport
+            // Применять параллакс только если элемент в области просмотра
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 const yPos = -(window.pageYOffset * speed);
                 element.style.transform = `translateY(${yPos}px)`;
@@ -145,10 +145,10 @@
         });
     }
 
-    // ==================== CARD REVEAL ANIMATIONS ====================
+    // ==================== АНИМАЦИИ ПОЯВЛЕНИЯ КАРТОЧЕК ====================
 
     /**
-     * Animate product cards on scroll
+     * Анимировать карточки товаров при прокрутке
      */
     function initCardAnimations() {
         const cardObserver = new IntersectionObserver((entries) => {
@@ -159,7 +159,7 @@
             });
         }, { threshold: 0.2 });
 
-        // Observe section3 and section4 cards
+        // Наблюдать за карточками секций 3 и 4
         const section3Cards = document.querySelectorAll('.section3-slider-card');
         const section4Cards = document.querySelectorAll('.section4-slider-card');
         
@@ -167,23 +167,23 @@
             cardObserver.observe(card);
         });
 
-        // Observe store cards
+        // Наблюдать за карточками магазинов
         const storeCards = document.querySelectorAll('.store-card');
         storeCards.forEach(card => {
             cardObserver.observe(card);
         });
 
-        // Observe gallery thumbnails
+        // Наблюдать за миниатюрами галереи
         const galleryThumbs = document.querySelectorAll('.gallery-thumb');
         galleryThumbs.forEach(thumb => {
             cardObserver.observe(thumb);
         });
     }
 
-    // ==================== BACKGROUND COLOR CHANGE ON SCROLL ====================
+    // ==================== ИЗМЕНЕНИЕ ЦВЕТА ФОНА ПРИ ПРОКРУТКЕ ====================
 
     /**
-     * Change section background colors on scroll
+     * Изменить цвета фона секций при прокрутке
      */
     function handleBackgroundChange() {
         const sections = document.querySelectorAll('section[id]');
@@ -200,10 +200,10 @@
         });
     }
 
-    // ==================== SCROLL REVEAL FOR CATALOG PAGE ====================
+    // ==================== ПОЯВЛЕНИЕ ПРИ ПРОКРУТКЕ ДЛЯ СТРАНИЦЫ КАТАЛОГА ====================
 
     /**
-     * Reveal catalog cards on scroll
+     * Показать карточки каталога при прокрутке
      */
     function initCatalogAnimations() {
         const catalogCards = document.querySelectorAll('.product-catalog-card');
@@ -220,7 +220,7 @@
         }, { threshold: 0.1 });
 
         catalogCards.forEach((card, index) => {
-            // Initial state
+            // Начальное состояние
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
             card.style.transition = `all 0.6s ease ${index * 0.05}s`;
@@ -229,21 +229,21 @@
         });
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Initialize all animations
+        // Инициализировать все анимации
         initScrollAnimations();
         initCounters();
         initCardAnimations();
         initCatalogAnimations();
 
-        // Header scroll effect
+        // Эффект прокрутки заголовка
         window.addEventListener('scroll', handleHeaderScroll);
-        handleHeaderScroll(); // Initial check
+        handleHeaderScroll(); // Начальная проверка
 
-        // Background change on scroll
+        // Изменение фона при прокрутке
         let scrollTimeout;
         window.addEventListener('scroll', function() {
             clearTimeout(scrollTimeout);
@@ -253,16 +253,16 @@
             }, 50);
         });
 
-        // Initial background check
+        // Начальная проверка фона
         handleBackgroundChange();
 
-        console.log('Scroll animations initialized!');
+        console.log('Анимации прокрутки инициализированы!');
     });
 
-    // ==================== UTILITY FUNCTIONS ====================
+    // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
 
     /**
-     * Add animation to element programmatically
+     * Добавить анимацию к элементу программно
      */
     function addScrollAnimation(element, animationType) {
         element.classList.add('scroll-animate');
@@ -270,29 +270,29 @@
     }
 
     /**
-     * Trigger animation manually
+     * Запустить анимацию вручную
      */
     function triggerAnimation(element) {
         element.classList.add('animated');
     }
 
     /**
-     * Reset animation (for replay)
+     * Сбросить анимацию (для повторного воспроизведения)
      */
     function resetAnimation(element) {
         element.classList.remove('animated');
-        // Force reflow
+        // Принудительный пересчет
         void element.offsetWidth;
         element.classList.add('animated');
     }
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
     window.addScrollAnimation = addScrollAnimation;
     window.triggerAnimation = triggerAnimation;
     window.resetAnimation = resetAnimation;
 
-    console.log('Scroll animation system ready!');
+    console.log('Система анимаций прокрутки готова!');
 
 })();
 

@@ -1,13 +1,13 @@
-// Smooth Scroll to Sections
+// Плавная прокрутка к секциям
 (function() {
     'use strict';
 
-    // Configuration
-    const scrollOffset = 80; // Offset for fixed header
-    const scrollDuration = 1000; // Animation duration in ms
+    // Конфигурация
+    const scrollOffset = 80; // Смещение для фиксированного заголовка
+    const scrollDuration = 1000; // Длительность анимации в мс
 
     /**
-     * Smooth scroll to element
+     * Плавная прокрутка к элементу
      */
     function smoothScrollTo(target, offset = scrollOffset) {
         const targetElement = document.querySelector(target);
@@ -22,14 +22,14 @@
         const distance = targetPosition - startPosition;
         let startTime = null;
 
-        // Easing function (easeInOutCubic)
+        // Функция плавности (easeInOutCubic)
         function easeInOutCubic(t) {
             return t < 0.5 
                 ? 4 * t * t * t 
                 : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
 
-        // Animation loop
+        // Цикл анимации
         function animation(currentTime) {
             if (startTime === null) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
@@ -41,13 +41,13 @@
             if (timeElapsed < scrollDuration) {
                 requestAnimationFrame(animation);
             } else {
-                // Scroll complete
-                console.log('Scrolled to:', target);
+                // Прокрутка завершена
+                console.log('Прокручено к:', target);
                 
-                // Show notification
+                // Показать уведомление
                 if (typeof toastInfo === 'function') {
                     const sectionName = target.replace('#', '').replace('-', ' ');
-                    toastInfo('Section', `Navigated to ${sectionName}`, { duration: 2000 });
+                    toastInfo('Секция', `Переход к ${sectionName}`, { duration: 2000 });
                 }
             }
         }
@@ -56,18 +56,18 @@
     }
 
     /**
-     * Handle navigation link clicks
+     * Обработать клики по ссылкам навигации
      */
     function handleNavClick(e) {
         const href = this.getAttribute('href');
         
-        // Only handle anchor links (starting with #)
+        // Обрабатывать только якорные ссылки (начинающиеся с #)
         if (href && href.startsWith('#')) {
             e.preventDefault();
             
             smoothScrollTo(href);
             
-            // Close mobile menu if open
+            // Закрыть мобильное меню, если открыто
             if (typeof closeMenu === 'function' || window.closeMenu) {
                 const mobileMenu = document.getElementById('mobile-menu');
                 if (mobileMenu && mobileMenu.classList.contains('active')) {
@@ -79,13 +79,13 @@
                 }
             }
 
-            // Update active state
+            // Обновить активное состояние
             updateActiveNavLink(href);
         }
     }
 
     /**
-     * Update active navigation link
+     * Обновить активную ссылку навигации
      */
     function updateActiveNavLink(target) {
         const navLinks = document.querySelectorAll('.nav-link');
@@ -100,7 +100,7 @@
     }
 
     /**
-     * Detect active section on scroll
+     * Определить активную секцию при прокрутке
      */
     function detectActiveSection() {
         const sections = document.querySelectorAll('section[id]');
@@ -118,7 +118,7 @@
             }
         });
 
-        // Update active link
+        // Обновить активную ссылку
         navLinks.forEach(link => {
             if (link.getAttribute('href') === `#${currentSection}`) {
                 link.classList.add('active');
@@ -128,12 +128,12 @@
         });
     }
 
-    // ==================== BACK TO TOP BUTTON ====================
+    // ==================== КНОПКА "НАВЕРХ" ====================
 
     const backToTopBtn = document.getElementById('back-to-top');
 
     /**
-     * Show/hide back to top button based on scroll position
+     * Показать/скрыть кнопку "Наверх" в зависимости от позиции прокрутки
      */
     function toggleBackToTopButton() {
         if (!backToTopBtn) return;
@@ -146,18 +146,18 @@
     }
 
     /**
-     * Scroll to top
+     * Прокрутить наверх
      */
     function scrollToTop() {
         smoothScrollTo('#home', 0);
     }
 
-    // ==================== SCROLL PROGRESS BAR ====================
+    // ==================== ИНДИКАТОР ПРОГРЕССА ПРОКРУТКИ ====================
 
     const scrollProgressBar = document.getElementById('scroll-progress');
 
     /**
-     * Update scroll progress bar
+     * Обновить индикатор прогресса прокрутки
      */
     function updateScrollProgress() {
         if (!scrollProgressBar) return;
@@ -168,25 +168,25 @@
         scrollProgressBar.style.width = `${scrolled}%`;
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Attach smooth scroll to all navigation links
+        // Привязать плавную прокрутку ко всем ссылкам навигации
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', handleNavClick);
         });
 
-        // Back to top button
+        // Кнопка "Наверх"
         if (backToTopBtn) {
             backToTopBtn.addEventListener('click', scrollToTop);
         }
 
-        // Scroll event listeners
+        // Обработчики событий прокрутки
         let scrollTimeout;
         window.addEventListener('scroll', function() {
-            // Throttle scroll events
+            // Ограничить частоту событий прокрутки
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 detectActiveSection();
@@ -195,26 +195,26 @@
             }, 100);
         });
 
-        // Initial checks
+        // Начальные проверки
         detectActiveSection();
         toggleBackToTopButton();
         updateScrollProgress();
 
-        // Set first link as active initially
+        // Установить первую ссылку как активную изначально
         const firstNavLink = document.querySelector('.nav-link[href="#home"]');
         if (firstNavLink) {
             firstNavLink.classList.add('active');
         }
 
-        console.log('Smooth scroll initialized!');
+        console.log('Плавная прокрутка инициализирована!');
     });
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
     window.smoothScrollTo = smoothScrollTo;
     window.scrollToTop = scrollToTop;
 
-    console.log('Navigation scroll functionality ready!');
+    console.log('Функциональность навигации прокрутки готова!');
 
 })();
 

@@ -1,8 +1,8 @@
-// Interactive Media Gallery with Audio
+// Интерактивная медиа-галерея с аудио
 (function() {
     'use strict';
 
-    // Gallery data - 12 products with unique sounds
+    // Данные галереи - 12 товаров с уникальными звуками
     const galleryItems = [
         { index: 0, image: '../images/rockerz.png', name: 'Boat Rockerz 333', desc: 'Premium wireless headphones with deep bass', frequency: 440 }, // A4
         { index: 1, image: '../images/kerz.png', name: 'Boat Kerz 234', desc: 'Compact earbuds with noise cancellation', frequency: 494 }, // B4
@@ -18,7 +18,7 @@
         { index: 11, image: '../images/product.png', name: 'Red Beats M19C22', desc: 'Iconic design with powerful bass', frequency: 1319 }  // E6
     ];
 
-    // DOM Elements
+    // Элементы DOM
     const mainImage = document.getElementById('gallery-main-image');
     const productName = document.getElementById('gallery-product-name');
     const productDesc = document.getElementById('gallery-product-desc');
@@ -33,7 +33,7 @@
     const nextBtn = document.getElementById('gallery-next');
     const randomBtn = document.getElementById('gallery-random');
 
-    // Audio Context and State
+    // Контекст аудио и состояние
     let audioContext = null;
     let oscillator = null;
     let gainNode = null;
@@ -42,7 +42,7 @@
     let currentVolume = 0.5;
 
     /**
-     * Initialize Web Audio API
+     * Инициализация Web Audio API
      */
     function initAudio() {
         if (!audioContext) {
@@ -55,35 +55,35 @@
     }
 
     /**
-     * Play sound for current item
+     * Воспроизведение звука для текущего элемента
      */
     function playSound(frequency, duration = 800) {
         initAudio();
 
-        // Stop current sound
+        // Остановить текущий звук
         stopSound();
 
-        // Create oscillator
+        // Создать осциллятор
         oscillator = audioContext.createOscillator();
-        oscillator.type = 'sine'; // Sine wave for smooth sound
+        oscillator.type = 'sine'; // Синусоидальная волна для плавного звука
         oscillator.frequency.value = frequency;
 
-        // Create envelope for smooth start/stop
+        // Создать огибающую для плавного начала/окончания
         const now = audioContext.currentTime;
         gainNode.gain.setValueAtTime(0, now);
         gainNode.gain.linearRampToValueAtTime(currentVolume, now + 0.1);
         gainNode.gain.linearRampToValueAtTime(0, now + duration / 1000);
 
-        // Connect and start
+        // Подключить и запустить
         oscillator.connect(gainNode);
         oscillator.start(now);
         oscillator.stop(now + duration / 1000);
 
-        // Update UI
+        // Обновить интерфейс
         setPlayingState(true);
         showSoundWave();
 
-        // Hide sound wave and update state after sound ends
+        // Скрыть звуковую волну и обновить состояние после окончания звука
         setTimeout(() => {
             setPlayingState(false);
             hideSoundWave();
@@ -93,14 +93,14 @@
     }
 
     /**
-     * Stop current sound
+     * Остановить текущий звук
      */
     function stopSound() {
         if (oscillator) {
             try {
                 oscillator.stop();
             } catch (e) {
-                // Already stopped
+                // Уже остановлен
             }
             oscillator = null;
         }
@@ -109,7 +109,7 @@
     }
 
     /**
-     * Show sound wave animation
+     * Показать анимацию звуковой волны
      */
     function showSoundWave() {
         if (soundWave) {
@@ -118,7 +118,7 @@
     }
 
     /**
-     * Hide sound wave animation
+     * Скрыть анимацию звуковой волны
      */
     function hideSoundWave() {
         if (soundWave) {
@@ -127,7 +127,7 @@
     }
 
     /**
-     * Set playing state
+     * Установить состояние воспроизведения
      */
     function setPlayingState(playing) {
         isPlaying = playing;
@@ -160,7 +160,7 @@
     }
 
     /**
-     * Change to specific gallery item
+     * Переключиться на конкретный элемент галереи
      */
     function changeGalleryItem(index, playAudio = true) {
         if (index < 0 || index >= galleryItems.length) return;
@@ -168,19 +168,19 @@
         const item = galleryItems[index];
         currentIndex = index;
 
-        // Fade out current image
+        // Затемнить текущее изображение
         mainImage.classList.add('fade-out');
 
         setTimeout(() => {
-            // Change image
+            // Изменить изображение
             mainImage.src = item.image;
             mainImage.alt = item.name;
 
-            // Update info
+            // Обновить информацию
             productName.textContent = item.name;
             productDesc.textContent = item.desc;
 
-            // Update thumbnails
+            // Обновить миниатюры
             thumbnails.forEach((thumb, i) => {
                 if (i === index) {
                     thumb.classList.add('active');
@@ -189,7 +189,7 @@
                 }
             });
 
-            // Fade in new image
+            // Показать новое изображение
             mainImage.classList.remove('fade-out');
             mainImage.classList.add('fade-in');
 
@@ -197,7 +197,7 @@
                 mainImage.classList.remove('fade-in');
             }, 600);
 
-            // Play sound
+            // Воспроизвести звук
             if (playAudio) {
                 playSound(item.frequency);
             }
@@ -208,7 +208,7 @@
     }
 
     /**
-     * Go to next item
+     * Перейти к следующему элементу
      */
     function nextItem() {
         const nextIndex = (currentIndex + 1) % galleryItems.length;
@@ -216,7 +216,7 @@
     }
 
     /**
-     * Go to previous item
+     * Перейти к предыдущему элементу
      */
     function prevItem() {
         const prevIndex = currentIndex === 0 ? galleryItems.length - 1 : currentIndex - 1;
@@ -224,7 +224,7 @@
     }
 
     /**
-     * Go to random item
+     * Перейти к случайному элементу
      */
     function randomItem() {
         let randomIndex;
@@ -234,14 +234,14 @@
         
         changeGalleryItem(randomIndex);
 
-        // Show notification
+        // Показать уведомление
         if (typeof toastInfo === 'function') {
-            toastInfo('Random Product', galleryItems[randomIndex].name);
+            toastInfo('Случайный товар', galleryItems[randomIndex].name);
         }
     }
 
     /**
-     * Update volume
+     * Обновить громкость
      */
     function updateVolume(value) {
         currentVolume = value / 100;
@@ -253,7 +253,7 @@
             volumeValue.textContent = `${value}%`;
         }
 
-        // Update volume icon
+        // Обновить иконку громкости
         const volumeIcon = document.querySelector('.volume-icon');
         if (volumeIcon) {
             if (value === 0) {
@@ -268,23 +268,23 @@
         }
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
 
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Thumbnail clicks
+        // Клики по миниатюрам
         thumbnails.forEach((thumb, index) => {
             thumb.addEventListener('click', function() {
-                // Check if this is a video thumbnail
+                // Проверить, является ли это миниатюрой видео
                 if (this.dataset.type === 'video') {
-                    // Video thumbnail handled by video-player.js
+                    // Миниатюра видео обрабатывается video-player.js
                     return;
                 }
                 changeGalleryItem(index);
             });
         });
 
-        // Navigation buttons
+        // Кнопки навигации
         if (prevBtn) {
             prevBtn.addEventListener('click', prevItem);
         }
@@ -297,7 +297,7 @@
             randomBtn.addEventListener('click', randomItem);
         }
 
-        // Play/Pause button
+        // Кнопка воспроизведения/паузы
         if (playPauseBtn) {
             playPauseBtn.addEventListener('click', function() {
                 if (isPlaying) {
@@ -309,19 +309,19 @@
             });
         }
 
-        // Volume slider
+        // Слайдер громкости
         if (volumeSlider) {
             volumeSlider.addEventListener('input', function() {
                 updateVolume(parseInt(this.value));
             });
 
-            // Initialize volume
+            // Инициализировать громкость
             updateVolume(parseInt(volumeSlider.value));
         }
 
-        // Keyboard navigation
+        // Навигация с клавиатуры
         document.addEventListener('keydown', function(e) {
-            // Only if gallery is in view
+            // Только если галерея в поле зрения
             const gallerySection = document.querySelector('.media-gallery-section');
             if (!gallerySection) return;
 
@@ -354,17 +354,17 @@
             }
         });
 
-        // Auto-play welcome sound after delay
+        // Автоматическое воспроизведение приветственного звука после задержки
         setTimeout(() => {
             if (typeof toastInfo === 'function') {
-                toastInfo('Gallery Ready', 'Click any product to hear its unique sound!');
+                toastInfo('Галерея готова', 'Нажмите на любой товар, чтобы услышать его уникальный звук!');
             }
         }, 1000);
 
         console.log('Media gallery initialized with', galleryItems.length, 'items');
     });
 
-    // ==================== EXPORT TO GLOBAL SCOPE ====================
+    // ==================== ЭКСПОРТ В ГЛОБАЛЬНУЮ ОБЛАСТЬ ВИДИМОСТИ ====================
 
     window.galleryChangeItem = changeGalleryItem;
     window.galleryPlaySound = playSound;
